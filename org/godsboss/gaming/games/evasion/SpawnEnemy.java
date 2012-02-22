@@ -3,10 +3,10 @@ package org.godsboss.gaming.games.evasion;
 import org.godsboss.gaming.util.Command;
 
 class SpawnEnemy implements Command{
-	private Evasion evasion;
+	private Game game;
 
-	public SpawnEnemy(Evasion evasion){
-		this.evasion = evasion;}
+	public SpawnEnemy(Game game){
+		this.game = game;}
 
 	public void call(){
-		evasion.addEnemy();}}
+		game.addEnemy();}}
