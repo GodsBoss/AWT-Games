@@ -6,6 +6,10 @@ import org.godsboss.gaming.control.LoopShutdownWindowListener;
 import org.godsboss.gaming.gui.Factory;
 import org.godsboss.gaming.gui.Renderer;
 import org.godsboss.gaming.gui.Window;
+import org.godsboss.gaming.physics2d.Bounds;
+import org.godsboss.gaming.physics2d.Position;
+import org.godsboss.gaming.physics2d.Size;
+import org.godsboss.gaming.physics2d.Velocity;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,13 +17,13 @@ import java.util.LinkedList;
 
 public class Evasion implements Renderer, Step{
 	private boolean isGameOver = true;
-	private Player player = new Player(320, 420);
-	private int size = 20;
 	private LinkedList<Enemy> enemies;
 	private double intervalBetweenEnemyCreations = .333;
 	private double timeUntilNextEnemy;
 	private double enemySpeed = 80;
 	private int highScore = 0;
+	private Bounds bounds = new Bounds(0, 0, 640, 480);
+	private Player player = new Player(bounds.getCenter(), new Size(20, 20));
 	private Window win;
 	private Loop loop;
 
@@ -28,7 +32,7 @@ public class Evasion implements Renderer, Step{
 		evasion.start();}
 
 	public void start(){
-		win = Factory.createWindow("Evasion", 640, 480);
+		win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
 		win.addMouseListener(new StartGameOnClick(this));
 		win.addMouseMotionListener(new MovePlayerOnMouseMove(player));
 		loop = new Loop(this, 15);
@@ -48,9 +52,7 @@ public class Evasion implements Renderer, Step{
 				timeUntilNextEnemy += intervalBetweenEnemyCreations;}
 			for(Enemy enemy: enemies){
 				enemy.tick(seconds);
-				double ex = enemy.getX();
-				double ey = enemy.getY();
-				if (Math.abs(ex - player.getX()) < size && Math.abs(ey - player.getY()) < size){
+				if (player.toBounds().doesOverlap(enemy.getPosition().centerBoundsWithSize(enemy.getSize()))){
 					endGame();}}}}
 
 	private void render(double seconds){
@@ -58,7 +60,7 @@ public class Evasion implements Renderer, Step{
 
 	public void drawOnto(Graphics g){
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 640, 480);
+		g.fillRect(0, 0, (int)bounds.getWidth(), (int)bounds.getHeight());
 		g.setColor(Color.WHITE);
 		g.drawString("High score: " + highScore, 20, 20);
 		if (isGameOver){
@@ -85,22 +87,20 @@ public class Evasion implements Renderer, Step{
 		isGameOver = true;}
 
 	private void addEnemy(){
-		double enemyX = (player.getX() + 320) % 640;
-		double enemyY = (player.getY() + 240) % 480;
-		double angle = Math.random() * 2 * Math.PI;
-		double enemyDx = Math.sin(angle) * enemySpeed;
-		double enemyDy = Math.cos(angle) * enemySpeed;
-		Enemy enemy = new Enemy(enemyX, enemyY, enemyDx, enemyDy);
+		Enemy enemy = new Enemy(player.getPosition().plus(bounds.getSize().times(0.5)).modulo(bounds), Velocity.randomDirection(enemySpeed), new Size(20, 20), bounds);
 		enemies.add(enemy);}
 
 	private void drawPlayer(Graphics g){
 		g.setColor(Color.GREEN);
-		g.drawRect(player.getX() - size / 2, player.getY() - size / 2, size, size);}
+		Bounds playerBounds = player.toBounds();
+		g.drawRect((int)playerBounds.getLeft(), (int)playerBounds.getTop(), (int)playerBounds.getWidth(), (int)playerBounds.getHeight());}
 
 	private void drawEnemies(Graphics g){
 		g.setColor(Color.RED);
 		for(Enemy enemy: enemies){
-			g.drawRect((int)enemy.getX() - size/2, (int)enemy.getY() - size/2, size, size);}}
+			int width = (int)enemy.getSize().getWidth();
+			int height = (int)enemy.getSize().getHeight();
+			g.drawRect((int)enemy.getPosition().getX() - width/2, (int)enemy.getPosition().getY() - height/2, width, height);}}
 
 	private void drawScore(Graphics g){
 		g.setColor(Color.WHITE);

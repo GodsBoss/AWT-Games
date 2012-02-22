@@ -1,5 +1,7 @@
 package org.godsboss.gaming.games.evasion;
 
+import org.godsboss.gaming.physics2d.Position;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
@@ -10,4 +12,4 @@ class MovePlayerOnMouseMove extends MouseMotionAdapter{
 		this.player = player;}
 
 	public void mouseMoved(MouseEvent e){
-		player.moveTo(e.getX(), e.getY());}}
+		player.moveTo(new Position(e.getX(), e.getY()));}}

@@ -1,19 +1,22 @@
 package org.godsboss.gaming.games.evasion;
 
+import org.godsboss.gaming.physics2d.Bounds;
+import org.godsboss.gaming.physics2d.Position;
+import org.godsboss.gaming.physics2d.Size;
+
 class Player{
-	private int x;
-	private int y;
+	private Position position;
+	private Size size;
 
-	public Player(int initialX, int initialY){
-		x = initialX;
-		y = initialY;}
+	public Player(Position initialPosition, Size size){
+		position = initialPosition;
+		this.size = size;}
 
-	public int getX(){
-		return x;}
+	public Position getPosition(){
+		return position;}
 
-	public int getY(){
-		return y;}
+	public Bounds toBounds(){
+		return position.centerBoundsWithSize(size);}
 
-	public void moveTo(int newX, int newY){
-		x = newX;
-		y = newY;}}
+	public void moveTo(Position newPosition){
+		position = newPosition;}}

@@ -1,23 +1,27 @@
 package org.godsboss.gaming.games.evasion;
 
-class Enemy{
-	private double x;
-	private double y;
-	private double dx;
-	private double dy;
+import org.godsboss.gaming.physics2d.Bounds;
+import org.godsboss.gaming.physics2d.Position;
+import org.godsboss.gaming.physics2d.Size;
+import org.godsboss.gaming.physics2d.Velocity;
 
-	public Enemy(double startX, double startY, double startDx, double startDy){
-		x = startX;
-		y = startY;
-		dx = startDx;
-		dy = startDy;}
+class Enemy{
+	private Position position;
+	private Velocity velocity;
+	private Size size;
+	private Bounds bounds;
+
+	public Enemy(Position position, Velocity velocity, Size size, Bounds bounds){
+		this.position = position;
+		this.velocity = velocity;
+		this.size     = size;
+		this.bounds   = bounds;}
 
 	public void tick(double seconds){
-		x = (x + dx * seconds + 640) % 640;
-		y = (y + dy * seconds + 480) % 480;}
+		position = position.plus(velocity.times(seconds)).modulo(bounds);}
 
-	public double getX(){
-		return x;}
+	public Position getPosition(){
+		return position;}
 
-	public double getY(){
-		return y;}}
+	public Size getSize(){
+		return size;}}
