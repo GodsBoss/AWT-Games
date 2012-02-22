@@ -1,9 +1,9 @@
 package org.godsboss.gaming.app;
 
 public class Loop implements Runnable{
+	private final Step step;
+	private final int interval;
 	private boolean isRunning = false;
-	private Step step;
-	private int interval;
 
 	public Loop(Step step, int interval){
 		this.step = step;

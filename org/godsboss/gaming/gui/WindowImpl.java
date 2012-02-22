@@ -8,9 +8,10 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
 class WindowImpl implements Window{
-	private String title;
-	private int width;
-	private int height;
+	private final String title;
+	private final int width;
+	private final int height;
+
 	private JFrame frame;
 	private Canvas canvas;
 	public BufferStrategy buffer;

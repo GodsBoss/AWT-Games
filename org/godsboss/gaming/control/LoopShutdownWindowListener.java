@@ -6,7 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class LoopShutdownWindowListener extends WindowAdapter{
-	private Loop loop;
+	private final Loop loop;
 
 	public LoopShutdownWindowListener(Loop loop){
 		this.loop = loop;}
