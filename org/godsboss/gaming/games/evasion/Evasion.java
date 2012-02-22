@@ -13,8 +13,7 @@ import java.util.LinkedList;
 
 public class Evasion implements Renderer, Step{
 	private boolean isGameOver = true;
-	private int x = 320;
-	private int y = 240;
+	private Player player = new Player(320, 420);
 	private int size = 20;
 	private LinkedList<Enemy> enemies;
 	private double intervalBetweenEnemyCreations = .333;
@@ -31,7 +30,7 @@ public class Evasion implements Renderer, Step{
 	public void start(){
 		win = Factory.createWindow("Evasion", 640, 480);
 		win.addMouseListener(new StartGameOnClick(this));
-		win.addMouseMotionListener(new MovePlayerOnMouseMove(this));
+		win.addMouseMotionListener(new MovePlayerOnMouseMove(player));
 		loop = new Loop(this, 15);
 		win.addWindowListener(new LoopShutdownWindowListener(loop));
 		loop.start();}
@@ -51,7 +50,7 @@ public class Evasion implements Renderer, Step{
 				enemy.tick(seconds);
 				double ex = enemy.getX();
 				double ey = enemy.getY();
-				if (Math.abs(ex - x) < size && Math.abs(ey - y) < size){
+				if (Math.abs(ex - player.getX()) < size && Math.abs(ey - player.getY()) < size){
 					endGame();}}}}
 
 	private void render(double seconds){
@@ -86,8 +85,8 @@ public class Evasion implements Renderer, Step{
 		isGameOver = true;}
 
 	private void addEnemy(){
-		double enemyX = (x + 320) % 640;
-		double enemyY = (y + 240) % 480;
+		double enemyX = (player.getX() + 320) % 640;
+		double enemyY = (player.getY() + 240) % 480;
 		double angle = Math.random() * 2 * Math.PI;
 		double enemyDx = Math.sin(angle) * enemySpeed;
 		double enemyDy = Math.cos(angle) * enemySpeed;
@@ -96,7 +95,7 @@ public class Evasion implements Renderer, Step{
 
 	private void drawPlayer(Graphics g){
 		g.setColor(Color.GREEN);
-		g.drawRect(x - size / 2, y - size / 2, size, size);}
+		g.drawRect(player.getX() - size / 2, player.getY() - size / 2, size, size);}
 
 	private void drawEnemies(Graphics g){
 		g.setColor(Color.RED);
@@ -105,8 +104,4 @@ public class Evasion implements Renderer, Step{
 
 	private void drawScore(Graphics g){
 		g.setColor(Color.WHITE);
-		g.drawString("Your score: " + enemies.size(), 20, 40);}
-
-	public void setPlayerPosition(int newX, int newY){
-		x = newX;
-		y = newY;}}
+		g.drawString("Your score: " + enemies.size(), 20, 40);}}

@@ -4,10 +4,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
 class MovePlayerOnMouseMove extends MouseMotionAdapter{
-	private final Evasion evasion;
+	private final Player player;
 
-	public MovePlayerOnMouseMove(Evasion evasion){
-		this.evasion = evasion;}
+	public MovePlayerOnMouseMove(Player player){
+		this.player = player;}
 
 	public void mouseMoved(MouseEvent e){
-		evasion.setPlayerPosition(e.getX(), e.getY());}}
+		player.moveTo(e.getX(), e.getY());}}
