@@ -10,17 +10,16 @@ import org.godsboss.gaming.gui.Window;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
 
-public class Evasion implements MouseListener, MouseMotionListener, Renderer, Step{
+public class Evasion implements MouseMotionListener, Renderer, Step{
 	private boolean isGameOver = true;
 	private int x = 320;
 	private int y = 240;
 	private int size = 20;
 	private LinkedList<Enemy> enemies;
-	private int intervalBetweenEnemyCreations = 1;
+	private double intervalBetweenEnemyCreations = .333;
 	private double timeUntilNextEnemy;
 	private double enemySpeed = 80;
 	private int highScore = 0;
@@ -33,7 +32,7 @@ public class Evasion implements MouseListener, MouseMotionListener, Renderer, St
 
 	public void start(){
 		win = Factory.createWindow("Evasion", 640, 480);
-		win.addMouseListener(this);
+		win.addMouseListener(new StartGameOnClick(this));
 		win.addMouseMotionListener(this);
 		loop = new Loop(this, 15);
 		win.addWindowListener(new LoopShutdownWindowListener(loop));
@@ -77,11 +76,12 @@ public class Evasion implements MouseListener, MouseMotionListener, Renderer, St
 		g.drawString("Game over", 300, 230);
 		g.drawString("Click for a new game", 280, 250);}
 
-	private void initGame(){
-		timeUntilNextEnemy = intervalBetweenEnemyCreations;
-		enemies = new LinkedList<Enemy>();
-		isGameOver = false;
-		addEnemy();}
+	public void startGame(){
+		if (isGameOver){
+			timeUntilNextEnemy = intervalBetweenEnemyCreations;
+			enemies = new LinkedList<Enemy>();
+			isGameOver = false;
+			addEnemy();}}
 
 	private void endGame(){
 		highScore = Math.max(enemies.size(), highScore);
@@ -108,18 +108,6 @@ public class Evasion implements MouseListener, MouseMotionListener, Renderer, St
 	private void drawScore(Graphics g){
 		g.setColor(Color.WHITE);
 		g.drawString("Your score: " + enemies.size(), 20, 40);}
-
-	public void mouseClicked(MouseEvent e){}
-
-	public void mouseEntered(MouseEvent e){}
-
-	public void mouseExited(MouseEvent e){}
-
-	public void mousePressed(MouseEvent e){}
-
-	public void mouseReleased(MouseEvent e){
-		if (isGameOver){
-			initGame();}}
 
 	public void mouseDragged(MouseEvent e){}
 
