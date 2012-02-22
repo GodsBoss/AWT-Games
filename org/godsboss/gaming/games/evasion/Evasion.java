@@ -1,6 +1,8 @@
 package org.godsboss.gaming.games.evasion;
 
-import java.awt.Canvas;
+import org.godsboss.gaming.gui.Factory;
+import org.godsboss.gaming.gui.Window;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -10,13 +12,10 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 import java.util.LinkedList;
-import javax.swing.JFrame;
 
 public class Evasion implements Runnable, WindowListener, MouseListener, MouseMotionListener{
 	private boolean isGameOver = true;
 	private boolean isRunning = false;
-	private JFrame frame;
-	private Canvas canvas;
 	private BufferStrategy buffer;
 	private Thread thread;
 	private int x = 320;
@@ -34,18 +33,11 @@ public class Evasion implements Runnable, WindowListener, MouseListener, MouseMo
 		evasion.start();}
 
 	public void start(){
-		frame = new JFrame("Evasion");
-		canvas = new Canvas();
-		canvas.setSize(640, 480);
-		canvas.addMouseListener(this);
-		canvas.addMouseMotionListener(this);
-		frame.add(canvas);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.addWindowListener(this);
-		frame.pack();
-		frame.setVisible(true);
-		canvas.createBufferStrategy(2);
-		buffer = canvas.getBufferStrategy();
+		Window win = Factory.createWindow("Evasion", 640, 480);
+		win.addMouseListener(this);
+		win.addMouseMotionListener(this);
+		win.addWindowListener(this);
+		buffer = win.getBuffer();
 		isRunning = true;
 		thread = new Thread(this);
 		thread.start();}
