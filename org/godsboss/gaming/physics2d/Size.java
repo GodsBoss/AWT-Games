@@ -21,4 +21,7 @@ public class Size{
 		return height;}
 
 	public Size times(double factor){
-		return new Size(factor*width, factor*height);}}
+		return new Size(factor*width, factor*height);}
+
+	public Size plus(double extraWidth, double extraHeight){
+		return new Size(width + extraWidth, height + extraHeight);}}

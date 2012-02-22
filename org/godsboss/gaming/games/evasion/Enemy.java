@@ -18,6 +18,7 @@ class Enemy{
 		this.bounds   = bounds;}
 
 	public void tick(double seconds){
+		size = size.plus(seconds, seconds);
 		position = position.plus(velocity.times(seconds)).modulo(bounds);}
 
 	public Position getPosition(){
