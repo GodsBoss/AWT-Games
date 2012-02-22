@@ -1,5 +1,7 @@
 package org.godsboss.gaming.games.evasion;
 
+import org.godsboss.gaming.app.Loop;
+import org.godsboss.gaming.app.Step;
 import org.godsboss.gaming.gui.Factory;
 import org.godsboss.gaming.gui.Renderer;
 import org.godsboss.gaming.gui.Window;
@@ -13,20 +15,18 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.LinkedList;
 
-public class Evasion implements Runnable, WindowListener, MouseListener, MouseMotionListener, Renderer{
+public class Evasion implements WindowListener, MouseListener, MouseMotionListener, Renderer, Step{
 	private boolean isGameOver = true;
-	private boolean isRunning = false;
-	private Thread thread;
 	private int x = 320;
 	private int y = 240;
 	private int size = 20;
 	private LinkedList<Enemy> enemies;
 	private int intervalBetweenEnemyCreations = 1;
 	private double timeUntilNextEnemy;
-	private int stepInterval = 15;
 	private double enemySpeed = 80;
 	private int highScore = 0;
 	private Window win;
+	private Loop loop;
 
 	public static void main(String[] args){
 		Evasion evasion = new Evasion();
@@ -37,36 +37,28 @@ public class Evasion implements Runnable, WindowListener, MouseListener, MouseMo
 		win.addMouseListener(this);
 		win.addMouseMotionListener(this);
 		win.addWindowListener(this);
-		isRunning = true;
-		thread = new Thread(this);
-		thread.start();}
+		loop = new Loop(this, 15);
+		loop.start();}
 
-	public void run(){
-		while(isRunning){
-			try{
-				step();
-				Thread.sleep(stepInterval);}
-			catch(InterruptedException e){}}}
+	public void tick(double seconds){
+		update(seconds);
+		render(seconds);}
 
-	private void step(){
-		update();
-		render();}
-
-	private void update(){
+	private void update(double seconds){
 		if (isGameOver){}
 		else{
-			timeUntilNextEnemy -= stepInterval / 1000.0;
+			timeUntilNextEnemy -= seconds;
 			if (timeUntilNextEnemy < 0){
 				addEnemy();
 				timeUntilNextEnemy += intervalBetweenEnemyCreations;}
 			for(Enemy enemy: enemies){
-				enemy.tick(stepInterval / 1000.0);
+				enemy.tick(seconds);
 				double ex = enemy.getX();
 				double ey = enemy.getY();
 				if (Math.abs(ex - x) < size && Math.abs(ey - y) < size){
 					endGame();}}}}
 
-	private void render(){
+	private void render(double seconds){
 		win.render(this);}
 
 	public void drawOnto(Graphics g){
@@ -139,7 +131,7 @@ public class Evasion implements Runnable, WindowListener, MouseListener, MouseMo
 	public void windowActivated(WindowEvent e){}
 
 	public void windowClosed(WindowEvent e){
-		isRunning = false;}
+		loop.stop();}
 
 	public void windowClosing(WindowEvent e){}
 
