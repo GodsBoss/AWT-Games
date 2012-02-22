@@ -9,11 +9,9 @@ import org.godsboss.gaming.gui.Window;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
 
-public class Evasion implements MouseMotionListener, Renderer, Step{
+public class Evasion implements Renderer, Step{
 	private boolean isGameOver = true;
 	private int x = 320;
 	private int y = 240;
@@ -33,7 +31,7 @@ public class Evasion implements MouseMotionListener, Renderer, Step{
 	public void start(){
 		win = Factory.createWindow("Evasion", 640, 480);
 		win.addMouseListener(new StartGameOnClick(this));
-		win.addMouseMotionListener(this);
+		win.addMouseMotionListener(new MovePlayerOnMouseMove(this));
 		loop = new Loop(this, 15);
 		win.addWindowListener(new LoopShutdownWindowListener(loop));
 		loop.start();}
@@ -109,8 +107,6 @@ public class Evasion implements MouseMotionListener, Renderer, Step{
 		g.setColor(Color.WHITE);
 		g.drawString("Your score: " + enemies.size(), 20, 40);}
 
-	public void mouseDragged(MouseEvent e){}
-
-	public void mouseMoved(MouseEvent e){
-			x = e.getX();
-			y = e.getY();}}
+	public void setPlayerPosition(int newX, int newY){
+		x = newX;
+		y = newY;}}
