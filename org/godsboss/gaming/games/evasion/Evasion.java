@@ -2,6 +2,7 @@ package org.godsboss.gaming.games.evasion;
 
 import org.godsboss.gaming.app.Loop;
 import org.godsboss.gaming.app.Step;
+import org.godsboss.gaming.control.LoopShutdownWindowListener;
 import org.godsboss.gaming.gui.Factory;
 import org.godsboss.gaming.gui.Renderer;
 import org.godsboss.gaming.gui.Window;
@@ -11,11 +12,9 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.LinkedList;
 
-public class Evasion implements WindowListener, MouseListener, MouseMotionListener, Renderer, Step{
+public class Evasion implements MouseListener, MouseMotionListener, Renderer, Step{
 	private boolean isGameOver = true;
 	private int x = 320;
 	private int y = 240;
@@ -36,8 +35,8 @@ public class Evasion implements WindowListener, MouseListener, MouseMotionListen
 		win = Factory.createWindow("Evasion", 640, 480);
 		win.addMouseListener(this);
 		win.addMouseMotionListener(this);
-		win.addWindowListener(this);
 		loop = new Loop(this, 15);
+		win.addWindowListener(new LoopShutdownWindowListener(loop));
 		loop.start();}
 
 	public void tick(double seconds){
@@ -126,19 +125,4 @@ public class Evasion implements WindowListener, MouseListener, MouseMotionListen
 
 	public void mouseMoved(MouseEvent e){
 			x = e.getX();
-			y = e.getY();}
-
-	public void windowActivated(WindowEvent e){}
-
-	public void windowClosed(WindowEvent e){
-		loop.stop();}
-
-	public void windowClosing(WindowEvent e){}
-
-	public void windowDeactivated(WindowEvent e){}
-
-	public void windowDeiconified(WindowEvent e){}
-
-	public void windowIconified(WindowEvent e){}
-
-	public void windowOpened(WindowEvent e){}}
+			y = e.getY();}}
