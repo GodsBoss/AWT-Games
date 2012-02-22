@@ -1,6 +1,7 @@
 package org.godsboss.gaming.games.evasion;
 
 import org.godsboss.gaming.gui.Factory;
+import org.godsboss.gaming.gui.Renderer;
 import org.godsboss.gaming.gui.Window;
 
 import java.awt.Color;
@@ -10,13 +11,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.image.BufferStrategy;
 import java.util.LinkedList;
 
-public class Evasion implements Runnable, WindowListener, MouseListener, MouseMotionListener{
+public class Evasion implements Runnable, WindowListener, MouseListener, MouseMotionListener, Renderer{
 	private boolean isGameOver = true;
 	private boolean isRunning = false;
-	private BufferStrategy buffer;
 	private Thread thread;
 	private int x = 320;
 	private int y = 240;
@@ -27,17 +26,17 @@ public class Evasion implements Runnable, WindowListener, MouseListener, MouseMo
 	private int stepInterval = 15;
 	private double enemySpeed = 80;
 	private int highScore = 0;
+	private Window win;
 
 	public static void main(String[] args){
 		Evasion evasion = new Evasion();
 		evasion.start();}
 
 	public void start(){
-		Window win = Factory.createWindow("Evasion", 640, 480);
+		win = Factory.createWindow("Evasion", 640, 480);
 		win.addMouseListener(this);
 		win.addMouseMotionListener(this);
 		win.addWindowListener(this);
-		buffer = win.getBuffer();
 		isRunning = true;
 		thread = new Thread(this);
 		thread.start();}
@@ -68,7 +67,9 @@ public class Evasion implements Runnable, WindowListener, MouseListener, MouseMo
 					endGame();}}}}
 
 	private void render(){
-		Graphics g = buffer.getDrawGraphics();
+		win.render(this);}
+
+	public void drawOnto(Graphics g){
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 640, 480);
 		g.setColor(Color.WHITE);
@@ -78,8 +79,7 @@ public class Evasion implements Runnable, WindowListener, MouseListener, MouseMo
 		else{
 			drawPlayer(g);
 			drawEnemies(g);
-			drawScore(g);}
-		buffer.show();}
+			drawScore(g);}}
 
 	private void showGameOver(Graphics g){
 		g.setColor(Color.WHITE);

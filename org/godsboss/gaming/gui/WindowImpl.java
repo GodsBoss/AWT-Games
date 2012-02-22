@@ -33,8 +33,9 @@ class WindowImpl implements Window{
 			canvas.createBufferStrategy(2);
 			buffer = canvas.getBufferStrategy();}}
 
-	public BufferStrategy getBuffer(){
-		return buffer;}
+	public void render(Renderer renderer){
+		renderer.drawOnto(buffer.getDrawGraphics());
+		buffer.show();}
 
 	public void addMouseListener(MouseListener listener){
 		canvas.addMouseListener(listener);}
