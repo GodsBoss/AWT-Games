@@ -10,6 +10,7 @@ import org.godsboss.gaming.physics2d.Bounds;
 import org.godsboss.gaming.physics2d.Position;
 import org.godsboss.gaming.physics2d.Size;
 import org.godsboss.gaming.physics2d.Velocity;
+import org.godsboss.gaming.util.RegularExecutor;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -18,14 +19,13 @@ import java.util.LinkedList;
 public class Evasion implements Renderer, Step{
 	private boolean isGameOver = true;
 	private LinkedList<Enemy> enemies;
-	private double intervalBetweenEnemyCreations = .333;
-	private double timeUntilNextEnemy;
 	private double enemySpeed = 80;
 	private int highScore = 0;
 	private Bounds bounds = new Bounds(0, 0, 640, 480);
 	private Player player = new Player(bounds.getCenter(), new Size(20, 20));
 	private Window win;
 	private Loop loop;
+	private RegularExecutor enemySpawner;
 
 	public static void main(String[] args){
 		Evasion evasion = new Evasion();
@@ -37,6 +37,7 @@ public class Evasion implements Renderer, Step{
 		win.addMouseMotionListener(new MovePlayerOnMouseMove(player));
 		loop = new Loop(this, 15);
 		win.addWindowListener(new LoopShutdownWindowListener(loop));
+		enemySpawner = new RegularExecutor(new SpawnEnemy(this), 0.333);
 		loop.start();}
 
 	public void tick(double seconds){
@@ -46,10 +47,7 @@ public class Evasion implements Renderer, Step{
 	private void update(double seconds){
 		if (isGameOver){}
 		else{
-			timeUntilNextEnemy -= seconds;
-			if (timeUntilNextEnemy < 0){
-				addEnemy();
-				timeUntilNextEnemy += intervalBetweenEnemyCreations;}
+			enemySpawner.pass(seconds);
 			for(Enemy enemy: enemies){
 				enemy.tick(seconds);
 				if (player.toBounds().doesOverlap(enemy.getPosition().centerBoundsWithSize(enemy.getSize()))){
@@ -77,7 +75,6 @@ public class Evasion implements Renderer, Step{
 
 	public void startGame(){
 		if (isGameOver){
-			timeUntilNextEnemy = intervalBetweenEnemyCreations;
 			enemies = new LinkedList<Enemy>();
 			isGameOver = false;
 			addEnemy();}}
@@ -86,7 +83,7 @@ public class Evasion implements Renderer, Step{
 		highScore = Math.max(enemies.size(), highScore);
 		isGameOver = true;}
 
-	private void addEnemy(){
+	public void addEnemy(){
 		Enemy enemy = new Enemy(player.getPosition().plus(bounds.getSize().times(0.5)).modulo(bounds), Velocity.randomDirection(enemySpeed), Size.randomWithin(10, 30), bounds);
 		enemies.add(enemy);}
 
