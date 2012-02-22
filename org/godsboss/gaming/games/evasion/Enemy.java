@@ -23,5 +23,8 @@ class Enemy{
 	public Position getPosition(){
 		return position;}
 
+	public Bounds toBounds(){
+		return position.centerBoundsWithSize(size);}
+
 	public Size getSize(){
 		return size;}}

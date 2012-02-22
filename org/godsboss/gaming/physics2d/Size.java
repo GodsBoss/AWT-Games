@@ -11,6 +11,9 @@ public class Size{
 	public Size(double size){
 		this(size, size);}
 
+	public static Size randomWithin(double min, double max){
+		return new Size(Math.random()*(max-min) + min);}
+
 	public double getWidth(){
 		return width;}
 

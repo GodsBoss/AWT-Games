@@ -87,20 +87,20 @@ public class Evasion implements Renderer, Step{
 		isGameOver = true;}
 
 	private void addEnemy(){
-		Enemy enemy = new Enemy(player.getPosition().plus(bounds.getSize().times(0.5)).modulo(bounds), Velocity.randomDirection(enemySpeed), new Size(20, 20), bounds);
+		Enemy enemy = new Enemy(player.getPosition().plus(bounds.getSize().times(0.5)).modulo(bounds), Velocity.randomDirection(enemySpeed), Size.randomWithin(10, 30), bounds);
 		enemies.add(enemy);}
 
 	private void drawPlayer(Graphics g){
 		g.setColor(Color.GREEN);
-		Bounds playerBounds = player.toBounds();
-		g.drawRect((int)playerBounds.getLeft(), (int)playerBounds.getTop(), (int)playerBounds.getWidth(), (int)playerBounds.getHeight());}
+		drawBounds(g, player.toBounds());}
 
 	private void drawEnemies(Graphics g){
 		g.setColor(Color.RED);
 		for(Enemy enemy: enemies){
-			int width = (int)enemy.getSize().getWidth();
-			int height = (int)enemy.getSize().getHeight();
-			g.drawRect((int)enemy.getPosition().getX() - width/2, (int)enemy.getPosition().getY() - height/2, width, height);}}
+			drawBounds(g, enemy.toBounds());}}
+
+	private void drawBounds(Graphics g, Bounds b){
+		g.drawRect((int)b.getLeft(), (int)b.getTop(), (int)b.getWidth(), (int)b.getHeight());}
 
 	private void drawScore(Graphics g){
 		g.setColor(Color.WHITE);
