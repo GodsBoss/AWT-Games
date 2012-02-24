@@ -12,6 +12,7 @@ import org.godsboss.gaming.physics2d.Velocity;
 import org.godsboss.gaming.util.RegularExecutor;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,14 +26,13 @@ public class Game implements Step{
 	private Loop loop;
 	private RegularExecutor enemySpawner;
 	private Output output;
-	private LinkedList<Position> mouseClicks = new LinkedList<Position>();
-	private LinkedList<Position> mouseMoves  = new LinkedList<Position>();
+	private EventStorage eventStorage;
 
 	public void start(){
 		Window win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
-		StoreMouseEvent store = new StoreMouseEvent(this);
-		win.addMouseListener(store);
-		win.addMouseMotionListener(store);
+		eventStorage = new EventStorage();
+		win.addMouseListener(eventStorage);
+		win.addMouseMotionListener(eventStorage);
 		loop = new Loop(this, 15);
 		win.addWindowListener(new LoopShutdownWindowListener(loop));
 		enemySpawner = new RegularExecutor(new SpawnEnemy(this), 0.333);
@@ -45,12 +45,12 @@ public class Game implements Step{
 		render(seconds);}
 
 	private void handleInput(){
-		if (mouseClicks.size()>0){
+		if (eventStorage.getMouseClicks().size()>0){
 			startGame();}
-		if (mouseMoves.size()>0){
-			player.moveTo(mouseMoves.getLast());}
-		mouseClicks.clear();
-		mouseMoves.clear();}
+		if (eventStorage.getMouseMoves().size()>0){
+			MouseEvent lastMove = eventStorage.getMouseMoves().getLast();
+			player.moveTo(new Position(lastMove.getX(), lastMove.getY()));}
+		eventStorage.clear();}
 
 	private void update(double seconds){
 		if (isGameOver){}
@@ -97,10 +97,4 @@ public class Game implements Step{
 		return enemies.size();}
 
 	public int getHighScore(){
-		return highScore;}
-
-	public synchronized void mouseClicked(Position p){
-		mouseClicks.add(p);}
-
-	public synchronized void mouseMoved(Position p){
-		mouseMoves.add(p);}}
+		return highScore;}}
