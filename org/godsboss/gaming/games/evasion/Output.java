@@ -24,7 +24,9 @@ class Output implements Renderer{
 			drawGameOver(g);}
 		else{
 			drawEnemies(g);
-			drawPlayer(g);}}
+			drawPlayer(g);
+			drawScore(g);}
+		drawHighScore(g);}
 
 	private void clear(Graphics g){
 		g.setColor(Color.BLACK);
@@ -45,4 +47,12 @@ class Output implements Renderer{
 			drawBounds(g, enemy.toBounds());}}
 
 	private void drawBounds(Graphics g, Bounds b){
-		g.drawRect((int)b.getLeft(), (int)b.getTop(), (int)b.getWidth(), (int)b.getHeight());}}
+		g.drawRect((int)b.getLeft(), (int)b.getTop(), (int)b.getWidth(), (int)b.getHeight());}
+
+	private void drawScore(Graphics g){
+		g.setColor(Color.WHITE);
+		g.drawString("Your score: " + game.getEnemies().size(), 20, 40);}
+
+	private void drawHighScore(Graphics g){
+		g.setColor(Color.WHITE);
+		g.drawString("High score: " + game.getHighScore(), 20, 20);}}

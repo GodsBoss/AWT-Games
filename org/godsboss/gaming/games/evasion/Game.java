@@ -12,7 +12,6 @@ import org.godsboss.gaming.physics2d.Size;
 import org.godsboss.gaming.physics2d.Velocity;
 import org.godsboss.gaming.util.RegularExecutor;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,12 +55,7 @@ public class Game implements Renderer, Step{
 		win.render(this);}
 
 	public void drawOnto(Graphics g){
-		output.drawOnto(g);
-		g.setColor(Color.WHITE);
-		g.drawString("High score: " + highScore, 20, 20);
-		if (isGameOver){}
-		else{
-			drawScore(g);}}
+		output.drawOnto(g);}
 
 	public void startGame(){
 		if (isGameOver){
@@ -77,10 +71,6 @@ public class Game implements Renderer, Step{
 		Enemy enemy = new Enemy(player.getPosition().plus(bounds.getSize().times(0.5)).modulo(bounds), Velocity.randomDirection(enemySpeed), Size.randomWithin(10, 30), bounds);
 		enemies.add(enemy);}
 
-	private void drawScore(Graphics g){
-		g.setColor(Color.WHITE);
-		g.drawString("Your score: " + enemies.size(), 20, 40);}
-
 	public int getWidth(){
 		return (int)bounds.getWidth();}
 
@@ -94,4 +84,7 @@ public class Game implements Renderer, Step{
 		return player;}
 
 	public List<Enemy> getEnemies(){
-		return enemies;}}
+		return enemies;}
+
+	public int getHighScore(){
+		return highScore;}}
