@@ -30,8 +30,9 @@ public class Game implements Step{
 
 	public void start(){
 		Window win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
-		win.addMouseListener(new StoreClickOnClick(this));
-		win.addMouseMotionListener(new MovePlayerOnMouseMove(player));
+		StoreMouseEvent store = new StoreMouseEvent(this);
+		win.addMouseListener(store);
+		win.addMouseMotionListener(store);
 		loop = new Loop(this, 15);
 		win.addWindowListener(new LoopShutdownWindowListener(loop));
 		enemySpawner = new RegularExecutor(new SpawnEnemy(this), 0.333);
@@ -46,6 +47,8 @@ public class Game implements Step{
 	private void handleInput(){
 		if (mouseClicks.size()>0){
 			startGame();}
+		if (mouseMoves.size()>0){
+			player.moveTo(mouseMoves.getLast());}
 		mouseClicks.clear();
 		mouseMoves.clear();}
 
