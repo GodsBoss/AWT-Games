@@ -4,7 +4,6 @@ import org.godsboss.gaming.app.Loop;
 import org.godsboss.gaming.app.Step;
 import org.godsboss.gaming.control.LoopShutdownWindowListener;
 import org.godsboss.gaming.gui.Factory;
-import org.godsboss.gaming.gui.Renderer;
 import org.godsboss.gaming.gui.Window;
 import org.godsboss.gaming.physics2d.Bounds;
 import org.godsboss.gaming.physics2d.Position;
@@ -16,7 +15,7 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Game implements Renderer, Step{
+public class Game implements Step{
 	private boolean isGameOver = true;
 	private LinkedList<Enemy> enemies;
 	private double enemySpeed = 80;
@@ -52,10 +51,7 @@ public class Game implements Renderer, Step{
 					endGame();}}}}
 
 	private void render(double seconds){
-		win.render(this);}
-
-	public void drawOnto(Graphics g){
-		output.drawOnto(g);}
+		win.render(output);}
 
 	public void startGame(){
 		if (isGameOver){
