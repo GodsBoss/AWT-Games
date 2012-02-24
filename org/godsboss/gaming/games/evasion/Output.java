@@ -51,7 +51,7 @@ class Output implements Renderer{
 
 	private void drawScore(Graphics g){
 		g.setColor(Color.WHITE);
-		g.drawString("Your score: " + game.getEnemies().size(), 20, 40);}
+		g.drawString("Your score: " + game.getScore(), 20, 40);}
 
 	private void drawHighScore(Graphics g){
 		g.setColor(Color.WHITE);

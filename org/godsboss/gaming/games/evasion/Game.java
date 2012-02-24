@@ -82,5 +82,8 @@ public class Game implements Step{
 	public List<Enemy> getEnemies(){
 		return enemies;}
 
+	public int getScore(){
+		return enemies.size();}
+
 	public int getHighScore(){
 		return highScore;}}
