@@ -26,6 +26,7 @@ public class Game implements Renderer, Step{
 	private Window win;
 	private Loop loop;
 	private RegularExecutor enemySpawner;
+	private Output output;
 
 	public void start(){
 		win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
@@ -34,6 +35,7 @@ public class Game implements Renderer, Step{
 		loop = new Loop(this, 15);
 		win.addWindowListener(new LoopShutdownWindowListener(loop));
 		enemySpawner = new RegularExecutor(new SpawnEnemy(this), 0.333);
+		output = new Output(this, win);
 		loop.start();}
 
 	public void tick(double seconds){
@@ -53,8 +55,7 @@ public class Game implements Renderer, Step{
 		win.render(this);}
 
 	public void drawOnto(Graphics g){
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, (int)bounds.getWidth(), (int)bounds.getHeight());
+		output.drawOnto(g);
 		g.setColor(Color.WHITE);
 		g.drawString("High score: " + highScore, 20, 20);
 		if (isGameOver){
@@ -97,4 +98,10 @@ public class Game implements Renderer, Step{
 
 	private void drawScore(Graphics g){
 		g.setColor(Color.WHITE);
-		g.drawString("Your score: " + enemies.size(), 20, 40);}}
+		g.drawString("Your score: " + enemies.size(), 20, 40);}
+
+	public int getWidth(){
+		return (int)bounds.getWidth();}
+
+	public int getHeight(){
+		return (int)bounds.getHeight();}}
