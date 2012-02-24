@@ -22,13 +22,12 @@ public class Game implements Step{
 	private int highScore = 0;
 	private Bounds bounds = new Bounds(0, 0, 640, 480);
 	private Player player = new Player(bounds.getCenter(), new Size(20, 20));
-	private Window win;
 	private Loop loop;
 	private RegularExecutor enemySpawner;
 	private Output output;
 
 	public void start(){
-		win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
+		Window win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
 		win.addMouseListener(new StartGameOnClick(this));
 		win.addMouseMotionListener(new MovePlayerOnMouseMove(player));
 		loop = new Loop(this, 15);
@@ -51,7 +50,7 @@ public class Game implements Step{
 					endGame();}}}}
 
 	private void render(double seconds){
-		win.render(output);}
+		output.render(seconds);}
 
 	public void startGame(){
 		if (isGameOver){
