@@ -58,17 +58,11 @@ public class Game implements Renderer, Step{
 		output.drawOnto(g);
 		g.setColor(Color.WHITE);
 		g.drawString("High score: " + highScore, 20, 20);
-		if (isGameOver){
-			showGameOver(g);}
+		if (isGameOver){}
 		else{
 			drawPlayer(g);
 			drawEnemies(g);
 			drawScore(g);}}
-
-	private void showGameOver(Graphics g){
-		g.setColor(Color.WHITE);
-		g.drawString("Game over", 300, 230);
-		g.drawString("Click for a new game", 280, 250);}
 
 	public void startGame(){
 		if (isGameOver){
@@ -104,4 +98,7 @@ public class Game implements Renderer, Step{
 		return (int)bounds.getWidth();}
 
 	public int getHeight(){
-		return (int)bounds.getHeight();}}
+		return (int)bounds.getHeight();}
+
+	public boolean isOver(){
+		return isGameOver;}}
