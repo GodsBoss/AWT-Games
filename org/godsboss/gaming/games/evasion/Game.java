@@ -25,10 +25,12 @@ public class Game implements Step{
 	private Loop loop;
 	private RegularExecutor enemySpawner;
 	private Output output;
+	private LinkedList<Position> mouseClicks = new LinkedList<Position>();
+	private LinkedList<Position> mouseMoves  = new LinkedList<Position>();
 
 	public void start(){
 		Window win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
-		win.addMouseListener(new StartGameOnClick(this));
+		win.addMouseListener(new StoreClickOnClick(this));
 		win.addMouseMotionListener(new MovePlayerOnMouseMove(player));
 		loop = new Loop(this, 15);
 		win.addWindowListener(new LoopShutdownWindowListener(loop));
@@ -37,8 +39,15 @@ public class Game implements Step{
 		loop.start();}
 
 	public void tick(double seconds){
+		handleInput();
 		update(seconds);
 		render(seconds);}
+
+	private void handleInput(){
+		if (mouseClicks.size()>0){
+			startGame();}
+		mouseClicks.clear();
+		mouseMoves.clear();}
 
 	private void update(double seconds){
 		if (isGameOver){}
@@ -52,7 +61,7 @@ public class Game implements Step{
 	private void render(double seconds){
 		output.render(seconds);}
 
-	public void startGame(){
+	private void startGame(){
 		if (isGameOver){
 			enemies = new LinkedList<Enemy>();
 			isGameOver = false;
@@ -85,4 +94,10 @@ public class Game implements Step{
 		return enemies.size();}
 
 	public int getHighScore(){
-		return highScore;}}
+		return highScore;}
+
+	public synchronized void mouseClicked(Position p){
+		mouseClicks.add(p);}
+
+	public synchronized void mouseMoved(Position p){
+		mouseMoves.add(p);}}
