@@ -15,6 +15,7 @@ import org.godsboss.gaming.util.RegularExecutor;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Game implements Renderer, Step{
 	private boolean isGameOver = true;
@@ -60,8 +61,6 @@ public class Game implements Renderer, Step{
 		g.drawString("High score: " + highScore, 20, 20);
 		if (isGameOver){}
 		else{
-			drawPlayer(g);
-			drawEnemies(g);
 			drawScore(g);}}
 
 	public void startGame(){
@@ -78,18 +77,6 @@ public class Game implements Renderer, Step{
 		Enemy enemy = new Enemy(player.getPosition().plus(bounds.getSize().times(0.5)).modulo(bounds), Velocity.randomDirection(enemySpeed), Size.randomWithin(10, 30), bounds);
 		enemies.add(enemy);}
 
-	private void drawPlayer(Graphics g){
-		g.setColor(Color.GREEN);
-		drawBounds(g, player.toBounds());}
-
-	private void drawEnemies(Graphics g){
-		g.setColor(Color.RED);
-		for(Enemy enemy: enemies){
-			drawBounds(g, enemy.toBounds());}}
-
-	private void drawBounds(Graphics g, Bounds b){
-		g.drawRect((int)b.getLeft(), (int)b.getTop(), (int)b.getWidth(), (int)b.getHeight());}
-
 	private void drawScore(Graphics g){
 		g.setColor(Color.WHITE);
 		g.drawString("Your score: " + enemies.size(), 20, 40);}
@@ -101,4 +88,10 @@ public class Game implements Renderer, Step{
 		return (int)bounds.getHeight();}
 
 	public boolean isOver(){
-		return isGameOver;}}
+		return isGameOver;}
+
+	public Player getPlayer(){
+		return player;}
+
+	public List<Enemy> getEnemies(){
+		return enemies;}}
