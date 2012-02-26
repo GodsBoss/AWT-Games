@@ -6,30 +6,31 @@ import org.godsboss.gaming.physics2d.Size;
 import org.godsboss.gaming.physics2d.Velocity;
 
 class Enemy{
-	private Position position;
+	private Positionable positionable;
 	private Velocity velocity;
 	private Size size;
 	private Bounds bounds;
 	private Game game;
 
-	public Enemy(Position position, Velocity velocity, Size size, Bounds bounds, Game game){
-		this.position = position;
-		this.velocity = velocity;
-		this.size     = size;
-		this.bounds   = bounds;
-		this.game     = game;}
+	public Enemy(Positionable positionable, Velocity velocity, Size size, Bounds bounds, Game game){
+		this.positionable = positionable;
+		this.velocity     = velocity;
+		this.size         = size;
+		this.bounds       = bounds;
+		this.game         = game;}
 
 	public void tick(double seconds){
 		size = size.plus(seconds, seconds);
-		position = position.plus(velocity.times(seconds)).modulo(bounds);
+		positionable.moveTo(positionable.get().plus(velocity.times(seconds)).modulo(bounds));
+		positionable.tick(seconds);
 		if (game.getPlayer().overlapsWith(getPosition().centerBoundsWithSize(getSize()))){
 			game.endGame();}}
 
 	public Position getPosition(){
-		return position;}
+		return positionable.get();}
 
 	public Bounds toBounds(){
-		return position.centerBoundsWithSize(size);}
+		return positionable.get().centerBoundsWithSize(size);}
 
 	public Size getSize(){
 		return size;}}
