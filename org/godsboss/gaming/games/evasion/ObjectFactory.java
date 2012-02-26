@@ -5,6 +5,8 @@ import org.godsboss.gaming.physics2d.Position;
 import org.godsboss.gaming.physics2d.Size;
 import org.godsboss.gaming.physics2d.Velocity;
 
+import java.awt.Color;
+
 class ObjectFactory{
 	private final Bounds bounds;
 	private final Game game;
@@ -20,7 +22,8 @@ class ObjectFactory{
 		Positionable positionable = new Positionable(startingPosition);
 		Sized sized = new Sized(size);
 		playerBounded = new BoundedObject(positionable, sized);
-		return new Player(positionable, sized);}
+		RectangleRenderer renderer = new RectangleRenderer(playerBounded, Color.GREEN);
+		return new Player(positionable, sized, renderer);}
 
 	public Enemy createEnemy(Position startingPosition){
 		if (killPlayer == null){

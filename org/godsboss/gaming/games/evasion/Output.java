@@ -24,7 +24,7 @@ class Output implements Renderer{
 			drawGameOver(g);}
 		else{
 			drawEnemies(g);
-			drawPlayer(g);
+			game.getPlayer().render(g);
 			drawScore(g);}
 		drawHighScore(g);}
 
@@ -36,10 +36,6 @@ class Output implements Renderer{
 		g.setColor(Color.WHITE);
 		g.drawString("Game over", 300, 230);
 		g.drawString("Click for a new game", 280, 250);}
-
-	private void drawPlayer(Graphics g){
-		g.setColor(Color.GREEN);
-		drawBounds(g, game.getPlayer().toBounds());}
 
 	private void drawEnemies(Graphics g){
 		g.setColor(Color.RED);
