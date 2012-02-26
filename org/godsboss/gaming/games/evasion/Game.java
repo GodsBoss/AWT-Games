@@ -21,7 +21,7 @@ public class Game implements Step{
 	private int highScore = 0;
 	private Bounds bounds = new Bounds(0, 0, 640, 480);
 	private Loop loop;
-	private EnemySpawner enemySpawner;
+	private Entity enemySpawner;
 	private Output output;
 	private EventStorage eventStorage;
 	private ObjectFactory factory = new ObjectFactory(this, bounds);

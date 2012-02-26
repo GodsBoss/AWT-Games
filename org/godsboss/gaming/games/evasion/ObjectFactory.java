@@ -3,8 +3,10 @@ package org.godsboss.gaming.games.evasion;
 import org.godsboss.gaming.ecs.Control;
 import org.godsboss.gaming.ecs.Entity;
 import org.godsboss.gaming.ecs.NullControl;
+import org.godsboss.gaming.gui.NullRenderer;
 import org.godsboss.gaming.physics2d.Bounds;
 import org.godsboss.gaming.physics2d.Position;
+import org.godsboss.gaming.physics2d.PositionDifference;
 import org.godsboss.gaming.physics2d.Size;
 import org.godsboss.gaming.physics2d.Velocity;
 
@@ -51,5 +53,12 @@ class ObjectFactory{
 	private Moving createMoving(Positionable positionable){
 		return new Moving(positionable, bounds, Velocity.randomDirection(80));}
 
-	public EnemySpawner createEnemySpawner(double threshold){
-		return new EnemySpawner(threshold, playerPositionable, game, this);}}
+	public Entity createEnemySpawner(double threshold){
+		Entity spawner = new Entity(new NullRenderer(), nullControl);
+		Positionable self = new Positionable(new Position(0, 0));
+		PositionDifference diff = (new Position(0, 0)).minus(bounds.getCenter());
+		RelativePositioning positioning = new RelativePositioning(self, playerPositionable, diff, bounds);
+		spawner.addComponent(positioning);
+		spawner.addComponent(self);
+		spawner.addComponent(new EnemySpawning(0.333, self, this, game));
+		return spawner;}}

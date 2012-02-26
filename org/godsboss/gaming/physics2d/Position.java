@@ -23,6 +23,12 @@ public class Position{
 	public Position plus(Size size){
 		return plus(size.getWidth(), size.getHeight());}
 
+	public Position plus(PositionDifference difference){
+		return plus(difference.getHorizontal(), difference.getVertical());}
+
+	public PositionDifference minus(Position other){
+		return new PositionDifference(x - other.getX(), y - other.getY());}
+
 	public Position modulo(Bounds bounds){
 		double x = (this.x - bounds.getLeft() + bounds.getWidth())  % bounds.getWidth()  + bounds.getLeft();
 		double y = (this.y - bounds.getTop()  + bounds.getHeight()) % bounds.getHeight() + bounds.getTop();
