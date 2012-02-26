@@ -11,21 +11,25 @@ class Enemy{
 	private Growing growing;
 	private Sized sized;
 	private Game game;
+	private CollidesWithPlayer collision;
 
 	public Enemy(Positionable positionable, Moving moving, Sized sized, Growing growing, Game game){
 		this.positionable = positionable;
 		this.sized        = sized;
 		this.growing      = growing;
 		this.moving       = moving;
-		this.game         = game;}
+		this.game         = game;
+		this.collision    = collision;}
+
+	public void addCollision(CollidesWithPlayer collision){
+		this.collision = collision;}
 
 	public void tick(double seconds){
 		growing.tick(seconds);
 		sized.tick(seconds);
 		moving.tick(seconds);
 		positionable.tick(seconds);
-		if (game.getPlayer().overlapsWith(getPosition().centerBoundsWithSize(getSize()))){
-			game.endGame();}}
+		collision.tick(seconds);}
 
 	public Position getPosition(){
 		return positionable.get();}

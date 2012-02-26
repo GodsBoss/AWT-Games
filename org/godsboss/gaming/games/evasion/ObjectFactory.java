@@ -9,17 +9,27 @@ class ObjectFactory{
 	private final Bounds bounds;
 	private final Game game;
 
+	private KillPlayer killPlayer;
+	private BoundedObject playerBounded;
+
 	public ObjectFactory(Game game, Bounds bounds){
 		this.game   = game;
 		this.bounds = bounds;}
 
 	public Player createPlayer(Position startingPosition, Size size){
-		return new Player(new Positionable(startingPosition), new Sized(size));}
+		Positionable positionable = new Positionable(startingPosition);
+		Sized sized = new Sized(size);
+		playerBounded = new BoundedObject(positionable, sized);
+		return new Player(positionable, sized);}
 
 	public Enemy createEnemy(Position startingPosition){
+		if (killPlayer == null){
+			killPlayer = new KillPlayer(game);}
 		Positionable positionable = new Positionable(startingPosition);
 		Sized sized = new Sized(Size.randomWithin(10, 30));
-		return new Enemy(positionable, createMoving(positionable), sized, new Growing(sized), game);}
+		Enemy enemy = new Enemy(positionable, createMoving(positionable), sized, new Growing(sized), game);
+		enemy.addCollision(new CollidesWithPlayer(new BoundedObject(positionable, sized), playerBounded, killPlayer));
+		return enemy;}
 
 	private Moving createMoving(Positionable positionable){
 		return new Moving(positionable, bounds, Velocity.randomDirection(80));}
