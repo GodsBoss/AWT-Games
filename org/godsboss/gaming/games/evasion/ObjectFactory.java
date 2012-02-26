@@ -18,7 +18,7 @@ class ObjectFactory{
 
 	public Enemy createEnemy(Position startingPosition){
 		Positionable positionable = new Positionable(startingPosition);
-		return new Enemy(positionable, createMoving(positionable), Size.randomWithin(10, 30), game);}
+		return new Enemy(positionable, createMoving(positionable), new Sized(Size.randomWithin(10, 30)), game);}
 
 	private Moving createMoving(Positionable positionable){
 		return new Moving(positionable, bounds, Velocity.randomDirection(80));}

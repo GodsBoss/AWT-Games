@@ -8,17 +8,18 @@ import org.godsboss.gaming.physics2d.Velocity;
 class Enemy{
 	private Positionable positionable;
 	private Moving moving;
-	private Size size;
+	private Sized sized;
 	private Game game;
 
-	public Enemy(Positionable positionable, Moving moving, Size size, Game game){
+	public Enemy(Positionable positionable, Moving moving, Sized sized, Game game){
 		this.positionable = positionable;
-		this.size         = size;
+		this.sized        = sized;
 		this.moving       = moving;
 		this.game         = game;}
 
 	public void tick(double seconds){
-		size = size.plus(seconds, seconds);
+		sized.resize(sized.get().plus(seconds, seconds));
+		sized.tick(seconds);
 		moving.tick(seconds);
 		positionable.tick(seconds);
 		if (game.getPlayer().overlapsWith(getPosition().centerBoundsWithSize(getSize()))){
@@ -28,7 +29,7 @@ class Enemy{
 		return positionable.get();}
 
 	public Bounds toBounds(){
-		return positionable.get().centerBoundsWithSize(size);}
+		return positionable.get().centerBoundsWithSize(sized.get());}
 
 	public Size getSize(){
-		return size;}}
+		return sized.get();}}
