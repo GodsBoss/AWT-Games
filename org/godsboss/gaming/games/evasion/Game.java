@@ -11,7 +11,6 @@ import org.godsboss.gaming.physics2d.Size;
 import org.godsboss.gaming.physics2d.Velocity;
 import org.godsboss.gaming.util.RegularExecutor;
 
-import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
 
