@@ -25,5 +25,5 @@ class Player{
 
 	public void handleInput(EventStorage eventStorage){
 		if (eventStorage.getMouseMoves().size()>0){
-		MouseEvent lastMove = eventStorage.getMouseMoves().getLast();
-		moveTo(new Position(lastMove.getX(), lastMove.getY()));}}}
+			MouseEvent lastMove = eventStorage.getMouseMoves().getLast();
+			moveTo(new Position(lastMove.getX(), lastMove.getY()));}}}
