@@ -1,5 +1,6 @@
 package org.godsboss.gaming.games.evasion;
 
+import org.godsboss.gaming.ecs.Entity;
 import org.godsboss.gaming.gui.Renderer;
 import org.godsboss.gaming.gui.Window;
 import org.godsboss.gaming.physics2d.Bounds;
@@ -38,7 +39,7 @@ class Output implements Renderer{
 		g.drawString("Click for a new game", 280, 250);}
 
 	private void drawEnemies(Graphics g){
-		for(Enemy enemy: game.getEnemies()){
+		for(Entity enemy: game.getEnemies()){
 			enemy.render(g);}}
 
 	private void drawScore(Graphics g){

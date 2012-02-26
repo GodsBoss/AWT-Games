@@ -1,5 +1,6 @@
 package org.godsboss.gaming.games.evasion;
 
+import org.godsboss.gaming.ecs.Entity;
 import org.godsboss.gaming.physics2d.Bounds;
 import org.godsboss.gaming.physics2d.Position;
 import org.godsboss.gaming.physics2d.Size;
@@ -26,15 +27,19 @@ class ObjectFactory{
 		RectangleRenderer renderer = new RectangleRenderer(playerBounded, Color.GREEN);
 		return new Player(playerPositionable, sized, renderer);}
 
-	public Enemy createEnemy(Position startingPosition){
+	public Entity createEnemy(Position startingPosition){
 		if (killPlayer == null){
 			killPlayer = new KillPlayer(game);}
 		Positionable positionable = new Positionable(startingPosition);
 		Sized sized = new Sized(Size.randomWithin(10, 30));
 		BoundedObject enemyBounded = new BoundedObject(positionable, sized);
 		RectangleRenderer renderer = new RectangleRenderer(enemyBounded, Color.RED);
-		Enemy enemy = new Enemy(positionable, createMoving(positionable), sized, new Growing(sized), game, renderer);
-		enemy.addCollision(new CollidesWithPlayer(enemyBounded, playerBounded, killPlayer));
+		Entity enemy = new Entity(renderer);
+		enemy.addComponent(positionable);
+		enemy.addComponent(createMoving(positionable));
+		enemy.addComponent(sized);
+		enemy.addComponent(new Growing(sized));
+		enemy.addComponent(new CollidesWithPlayer(enemyBounded, playerBounded, killPlayer));
 		return enemy;}
 
 	private Moving createMoving(Positionable positionable){

@@ -3,6 +3,7 @@ package org.godsboss.gaming.games.evasion;
 import org.godsboss.gaming.app.Loop;
 import org.godsboss.gaming.app.Step;
 import org.godsboss.gaming.control.LoopShutdownWindowListener;
+import org.godsboss.gaming.ecs.Entity;
 import org.godsboss.gaming.gui.Factory;
 import org.godsboss.gaming.gui.Window;
 import org.godsboss.gaming.physics2d.Bounds;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class Game implements Step{
 	private boolean isGameOver = true;
-	private LinkedList<Enemy> enemies;
+	private LinkedList<Entity> enemies;
 	private int highScore = 0;
 	private Bounds bounds = new Bounds(0, 0, 640, 480);
 	private Loop loop;
@@ -52,7 +53,7 @@ public class Game implements Step{
 		else{
 			player.tick(seconds);
 			enemySpawner.tick(seconds);
-			for(Enemy enemy: enemies){
+			for(Entity enemy: enemies){
 				enemy.tick(seconds);}}}
 
 	private void render(double seconds){
@@ -60,14 +61,14 @@ public class Game implements Step{
 
 	private void startGame(){
 		if (isGameOver){
-			enemies = new LinkedList<Enemy>();
+			enemies = new LinkedList<Entity>();
 			isGameOver = false;}}
 
 	public void endGame(){
 		highScore = Math.max(enemies.size(), highScore);
 		isGameOver = true;}
 
-	public void addEnemy(Enemy enemy){
+	public void addEnemy(Entity enemy){
 		enemies.add(enemy);}
 
 	public int getWidth(){
@@ -82,7 +83,7 @@ public class Game implements Step{
 	public Player getPlayer(){
 		return player;}
 
-	public List<Enemy> getEnemies(){
+	public List<Entity> getEnemies(){
 		return enemies;}
 
 	public int getScore(){

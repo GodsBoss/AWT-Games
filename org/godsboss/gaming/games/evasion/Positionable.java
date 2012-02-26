@@ -1,8 +1,9 @@
 package org.godsboss.gaming.games.evasion;
 
+import org.godsboss.gaming.ecs.Component;
 import org.godsboss.gaming.physics2d.Position;
 
-class Positionable{
+class Positionable implements Component{
 	private Position position;
 	private Position nextPosition;
 

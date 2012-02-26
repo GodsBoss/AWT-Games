@@ -1,8 +1,9 @@
 package org.godsboss.gaming.games.evasion;
 
+import org.godsboss.gaming.ecs.Component;
 import org.godsboss.gaming.physics2d.Size;
 
-class Sized{
+class Sized implements Component{
 	private Size size;
 	private Size nextSize;
 

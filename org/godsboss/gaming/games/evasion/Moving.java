@@ -1,9 +1,10 @@
 package org.godsboss.gaming.games.evasion;
 
+import org.godsboss.gaming.ecs.Component;
 import org.godsboss.gaming.physics2d.Bounds;
 import org.godsboss.gaming.physics2d.Velocity;
 
-class Moving{
+class Moving implements Component{
 	private final Positionable positionable;
 	private final Bounds bounds;
 	private Velocity velocity;
