@@ -12,7 +12,6 @@ import org.godsboss.gaming.physics2d.Velocity;
 import org.godsboss.gaming.util.RegularExecutor;
 
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,9 +46,7 @@ public class Game implements Step{
 	private void handleInput(){
 		if (eventStorage.getMouseClicks().size()>0){
 			startGame();}
-		if (eventStorage.getMouseMoves().size()>0){
-			MouseEvent lastMove = eventStorage.getMouseMoves().getLast();
-			player.moveTo(new Position(lastMove.getX(), lastMove.getY()));}
+		player.handleInput(eventStorage);
 		eventStorage.clear();}
 
 	private void update(double seconds){
