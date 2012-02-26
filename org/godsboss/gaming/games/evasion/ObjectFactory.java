@@ -17,7 +17,11 @@ class ObjectFactory{
 		return new Player(new Positionable(startingPosition), size);}
 
 	public Enemy createEnemy(Position startingPosition){
-		return new Enemy(new Positionable(startingPosition), Velocity.randomDirection(80), Size.randomWithin(10, 30), bounds, game);}
+		Positionable positionable = new Positionable(startingPosition);
+		return new Enemy(positionable, createMoving(positionable), Size.randomWithin(10, 30), game);}
+
+	private Moving createMoving(Positionable positionable){
+		return new Moving(positionable, bounds, Velocity.randomDirection(80));}
 
 	public EnemySpawner createEnemySpawner(double threshold){
 		return new EnemySpawner(threshold, game, this);}}
