@@ -25,7 +25,7 @@ class ObjectFactory{
 		Sized sized = new Sized(size);
 		playerBounded = new BoundedObject(playerPositionable, sized);
 		RectangleRenderer renderer = new RectangleRenderer(playerBounded, Color.GREEN);
-		return new Player(playerPositionable, sized, renderer);}
+		return new Player(playerPositionable, sized, renderer, new MoveObjectToMousePosition(playerPositionable));}
 
 	public Entity createEnemy(Position startingPosition){
 		if (killPlayer == null){

@@ -2,6 +2,7 @@ package org.godsboss.gaming.games.evasion;
 
 import org.godsboss.gaming.app.Loop;
 import org.godsboss.gaming.app.Step;
+import org.godsboss.gaming.control.EventStorage;
 import org.godsboss.gaming.control.LoopShutdownWindowListener;
 import org.godsboss.gaming.ecs.Entity;
 import org.godsboss.gaming.gui.Factory;

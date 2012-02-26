@@ -1,4 +1,4 @@
-package org.godsboss.gaming.games.evasion;
+package org.godsboss.gaming.control;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -6,7 +6,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
 import java.util.List;
 
-class EventStorage implements MouseListener, MouseMotionListener{
+public class EventStorage implements MouseListener, MouseMotionListener{
 	private LinkedList<MouseEvent> clicks = new LinkedList<MouseEvent>();
 	private LinkedList<MouseEvent> moves  = new LinkedList<MouseEvent>();
 
