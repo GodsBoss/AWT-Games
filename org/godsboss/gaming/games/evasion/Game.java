@@ -19,14 +19,14 @@ import java.util.List;
 public class Game implements Step{
 	private boolean isGameOver = true;
 	private LinkedList<Enemy> enemies;
-	private double enemySpeed = 80;
 	private int highScore = 0;
 	private Bounds bounds = new Bounds(0, 0, 640, 480);
-	private Player player = new Player(bounds.getCenter(), new Size(20, 20));
 	private Loop loop;
 	private RegularExecutor enemySpawner;
 	private Output output;
 	private EventStorage eventStorage;
+	private ObjectFactory factory = new ObjectFactory(bounds);
+	private Player player = new Player(bounds.getCenter(), new Size(20, 20));
 
 	public void start(){
 		Window win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
@@ -75,7 +75,7 @@ public class Game implements Step{
 		isGameOver = true;}
 
 	public void addEnemy(){
-		Enemy enemy = new Enemy(player.getPosition().plus(bounds.getSize().times(0.5)).modulo(bounds), Velocity.randomDirection(enemySpeed), Size.randomWithin(10, 30), bounds);
+		Enemy enemy = factory.createEnemy(player.getPosition().plus(bounds.getSize().times(0.5)).modulo(bounds));
 		enemies.add(enemy);}
 
 	public int getWidth(){
