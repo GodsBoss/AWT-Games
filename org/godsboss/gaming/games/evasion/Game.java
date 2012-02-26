@@ -9,7 +9,6 @@ import org.godsboss.gaming.physics2d.Bounds;
 import org.godsboss.gaming.physics2d.Position;
 import org.godsboss.gaming.physics2d.Size;
 import org.godsboss.gaming.physics2d.Velocity;
-import org.godsboss.gaming.util.RegularExecutor;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +19,7 @@ public class Game implements Step{
 	private int highScore = 0;
 	private Bounds bounds = new Bounds(0, 0, 640, 480);
 	private Loop loop;
-	private RegularExecutor enemySpawner;
+	private EnemySpawner enemySpawner;
 	private Output output;
 	private EventStorage eventStorage;
 	private ObjectFactory factory = new ObjectFactory(this, bounds);
@@ -33,7 +32,7 @@ public class Game implements Step{
 		win.addMouseMotionListener(eventStorage);
 		loop = new Loop(this, 15);
 		win.addWindowListener(new LoopShutdownWindowListener(loop));
-		enemySpawner = new RegularExecutor(new SpawnEnemy(this), 0.333);
+		enemySpawner = factory.createEnemySpawner(0.333);
 		output = new Output(this, win);
 		loop.start();}
 
@@ -52,7 +51,7 @@ public class Game implements Step{
 		if (isGameOver){}
 		else{
 			player.tick(seconds);
-			enemySpawner.pass(seconds);
+			enemySpawner.tick(seconds);
 			for(Enemy enemy: enemies){
 				enemy.tick(seconds);}}}
 
