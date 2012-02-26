@@ -25,7 +25,7 @@ public class Game implements Step{
 	private RegularExecutor enemySpawner;
 	private Output output;
 	private EventStorage eventStorage;
-	private ObjectFactory factory = new ObjectFactory(bounds);
+	private ObjectFactory factory = new ObjectFactory(this, bounds);
 	private Player player = factory.createPlayer(bounds.getCenter(), new Size(20, 20));
 
 	public void start(){
@@ -57,9 +57,7 @@ public class Game implements Step{
 		else{
 			enemySpawner.pass(seconds);
 			for(Enemy enemy: enemies){
-				enemy.tick(seconds);
-				if (player.toBounds().doesOverlap(enemy.getPosition().centerBoundsWithSize(enemy.getSize()))){
-					endGame();}}}}
+				enemy.tick(seconds);}}}
 
 	private void render(double seconds){
 		output.render(seconds);}
@@ -70,7 +68,7 @@ public class Game implements Step{
 			isGameOver = false;
 			addEnemy();}}
 
-	private void endGame(){
+	public void endGame(){
 		highScore = Math.max(enemies.size(), highScore);
 		isGameOver = true;}
 

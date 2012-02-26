@@ -10,16 +10,20 @@ class Enemy{
 	private Velocity velocity;
 	private Size size;
 	private Bounds bounds;
+	private Game game;
 
-	public Enemy(Position position, Velocity velocity, Size size, Bounds bounds){
+	public Enemy(Position position, Velocity velocity, Size size, Bounds bounds, Game game){
 		this.position = position;
 		this.velocity = velocity;
 		this.size     = size;
-		this.bounds   = bounds;}
+		this.bounds   = bounds;
+		this.game     = game;}
 
 	public void tick(double seconds){
 		size = size.plus(seconds, seconds);
-		position = position.plus(velocity.times(seconds)).modulo(bounds);}
+		position = position.plus(velocity.times(seconds)).modulo(bounds);
+		if (game.getPlayer().toBounds().doesOverlap(getPosition().centerBoundsWithSize(getSize()))){
+			game.endGame();}}
 
 	public Position getPosition(){
 		return position;}
