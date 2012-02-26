@@ -38,12 +38,8 @@ class Output implements Renderer{
 		g.drawString("Click for a new game", 280, 250);}
 
 	private void drawEnemies(Graphics g){
-		g.setColor(Color.RED);
 		for(Enemy enemy: game.getEnemies()){
-			drawBounds(g, enemy.toBounds());}}
-
-	private void drawBounds(Graphics g, Bounds b){
-		g.drawRect((int)b.getLeft(), (int)b.getTop(), (int)b.getWidth(), (int)b.getHeight());}
+			enemy.render(g);}}
 
 	private void drawScore(Graphics g){
 		g.setColor(Color.WHITE);

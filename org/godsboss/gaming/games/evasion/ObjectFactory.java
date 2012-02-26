@@ -30,8 +30,10 @@ class ObjectFactory{
 			killPlayer = new KillPlayer(game);}
 		Positionable positionable = new Positionable(startingPosition);
 		Sized sized = new Sized(Size.randomWithin(10, 30));
-		Enemy enemy = new Enemy(positionable, createMoving(positionable), sized, new Growing(sized), game);
-		enemy.addCollision(new CollidesWithPlayer(new BoundedObject(positionable, sized), playerBounded, killPlayer));
+		BoundedObject enemyBounded = new BoundedObject(positionable, sized);
+		RectangleRenderer renderer = new RectangleRenderer(enemyBounded, Color.RED);
+		Enemy enemy = new Enemy(positionable, createMoving(positionable), sized, new Growing(sized), game, renderer);
+		enemy.addCollision(new CollidesWithPlayer(enemyBounded, playerBounded, killPlayer));
 		return enemy;}
 
 	private Moving createMoving(Positionable positionable){
