@@ -8,10 +8,12 @@ import java.awt.event.MouseEvent;
 
 class Player{
 	private Position position;
+	private Position nextPosition;
 	private Size size;
 
 	public Player(Position initialPosition, Size size){
 		position = initialPosition;
+		nextPosition = initialPosition;
 		this.size = size;}
 
 	public Position getPosition(){
@@ -21,7 +23,10 @@ class Player{
 		return position.centerBoundsWithSize(size);}
 
 	public void moveTo(Position newPosition){
-		position = newPosition;}
+		nextPosition = newPosition;}
+
+	public void tick(double seconds){
+		position = nextPosition;}
 
 	public void handleInput(EventStorage eventStorage){
 		if (eventStorage.getMouseMoves().size()>0){

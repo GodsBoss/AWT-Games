@@ -51,6 +51,7 @@ public class Game implements Step{
 	private void update(double seconds){
 		if (isGameOver){}
 		else{
+			player.tick(seconds);
 			enemySpawner.pass(seconds);
 			for(Enemy enemy: enemies){
 				enemy.tick(seconds);}}}
