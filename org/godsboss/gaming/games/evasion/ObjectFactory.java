@@ -14,7 +14,7 @@ class ObjectFactory{
 		this.bounds = bounds;}
 
 	public Player createPlayer(Position startingPosition, Size size){
-		return new Player(startingPosition, size);}
+		return new Player(new Positionable(startingPosition), size);}
 
 	public Enemy createEnemy(Position startingPosition){
 		return new Enemy(startingPosition, Velocity.randomDirection(80), Size.randomWithin(10, 30), bounds, game);}

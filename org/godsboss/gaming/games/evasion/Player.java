@@ -7,28 +7,26 @@ import org.godsboss.gaming.physics2d.Size;
 import java.awt.event.MouseEvent;
 
 class Player{
-	private Position position;
-	private Position nextPosition;
+	private Positionable positionable;
 	private Size size;
 
-	public Player(Position initialPosition, Size size){
-		position = initialPosition;
-		nextPosition = initialPosition;
+	public Player(Positionable positionable, Size size){
+		this.positionable = positionable;
 		this.size = size;}
 
 	public Position getPosition(){
-		return position;}
+		return positionable.get();}
 
 	public Bounds toBounds(){
-		return position.centerBoundsWithSize(size);}
+		return positionable.get().centerBoundsWithSize(size);}
 
 	public void moveTo(Position newPosition){
-		nextPosition = newPosition;}
+		positionable.moveTo(newPosition);}
 
 	public void tick(double seconds){
-		position = nextPosition;}
+		positionable.tick(seconds);}
 
 	public void handleInput(EventStorage eventStorage){
 		if (eventStorage.getMouseMoves().size()>0){
 			MouseEvent lastMove = eventStorage.getMouseMoves().getLast();
-			moveTo(new Position(lastMove.getX(), lastMove.getY()));}}}
+			positionable.moveTo(new Position(lastMove.getX(), lastMove.getY()));}}}
