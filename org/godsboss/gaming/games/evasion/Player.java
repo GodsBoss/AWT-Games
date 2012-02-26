@@ -8,23 +8,23 @@ import java.awt.event.MouseEvent;
 
 class Player{
 	private Positionable positionable;
-	private Size size;
+	private Sized sized;
 
-	public Player(Positionable positionable, Size size){
+	public Player(Positionable positionable, Sized sized){
 		this.positionable = positionable;
-		this.size = size;}
+		this.sized = sized;}
 
 	public Position getPosition(){
 		return positionable.get();}
 
 	public Bounds toBounds(){
-		return positionable.get().centerBoundsWithSize(size);}
+		return positionable.get().centerBoundsWithSize(sized.get());}
 
 	public void moveTo(Position newPosition){
 		positionable.moveTo(newPosition);}
 
 	public boolean overlapsWith(Bounds bounds){
-		return bounds.doesOverlap(positionable.get().centerBoundsWithSize(size));}
+		return bounds.doesOverlap(positionable.get().centerBoundsWithSize(sized.get()));}
 
 	public void tick(double seconds){
 		positionable.tick(seconds);}

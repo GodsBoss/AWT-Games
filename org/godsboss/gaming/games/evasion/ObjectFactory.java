@@ -14,7 +14,7 @@ class ObjectFactory{
 		this.bounds = bounds;}
 
 	public Player createPlayer(Position startingPosition, Size size){
-		return new Player(new Positionable(startingPosition), size);}
+		return new Player(new Positionable(startingPosition), new Sized(size));}
 
 	public Enemy createEnemy(Position startingPosition){
 		Positionable positionable = new Positionable(startingPosition);
