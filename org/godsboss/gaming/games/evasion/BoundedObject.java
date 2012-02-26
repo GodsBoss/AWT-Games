@@ -10,8 +10,11 @@ class BoundedObject{
 		this.positionable = positionable;
 		this.sized = sized;}
 
+	public Bounds toBounds(){
+		return positionable.get().centerBoundsWithSize(sized.get());}
+
 	public boolean overlaps(BoundedObject other){
-		return other.overlaps(positionable.get().centerBoundsWithSize(sized.get()));}
+		return other.overlaps(toBounds());}
 
 	public boolean overlaps(Bounds bounds){
-		return bounds.doesOverlap(positionable.get().centerBoundsWithSize(sized.get()));}}
+		return bounds.doesOverlap(toBounds());}}
