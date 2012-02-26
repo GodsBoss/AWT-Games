@@ -8,17 +8,19 @@ import org.godsboss.gaming.physics2d.Velocity;
 class Enemy{
 	private Positionable positionable;
 	private Moving moving;
+	private Growing growing;
 	private Sized sized;
 	private Game game;
 
-	public Enemy(Positionable positionable, Moving moving, Sized sized, Game game){
+	public Enemy(Positionable positionable, Moving moving, Sized sized, Growing growing, Game game){
 		this.positionable = positionable;
 		this.sized        = sized;
+		this.growing      = growing;
 		this.moving       = moving;
 		this.game         = game;}
 
 	public void tick(double seconds){
-		sized.resize(sized.get().plus(seconds, seconds));
+		growing.tick(seconds);
 		sized.tick(seconds);
 		moving.tick(seconds);
 		positionable.tick(seconds);
