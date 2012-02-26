@@ -26,7 +26,7 @@ public class Game implements Step{
 	private Output output;
 	private EventStorage eventStorage;
 	private ObjectFactory factory = new ObjectFactory(bounds);
-	private Player player = new Player(bounds.getCenter(), new Size(20, 20));
+	private Player player = factory.createPlayer(bounds.getCenter(), new Size(20, 20));
 
 	public void start(){
 		Window win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
