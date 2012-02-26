@@ -20,4 +20,4 @@ class ObjectFactory{
 		return new Enemy(startingPosition, Velocity.randomDirection(80), Size.randomWithin(10, 30), bounds, game);}
 
 	public EnemySpawner createEnemySpawner(double threshold){
-		return new EnemySpawner(threshold, game);}}
+		return new EnemySpawner(threshold, game, this);}}

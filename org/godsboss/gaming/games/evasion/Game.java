@@ -61,15 +61,13 @@ public class Game implements Step{
 	private void startGame(){
 		if (isGameOver){
 			enemies = new LinkedList<Enemy>();
-			isGameOver = false;
-			addEnemy();}}
+			isGameOver = false;}}
 
 	public void endGame(){
 		highScore = Math.max(enemies.size(), highScore);
 		isGameOver = true;}
 
-	public void addEnemy(){
-		Enemy enemy = factory.createEnemy(player.getPosition().plus(bounds.getSize().times(0.5)).modulo(bounds));
+	public void addEnemy(Enemy enemy){
 		enemies.add(enemy);}
 
 	public int getWidth(){
@@ -91,4 +89,7 @@ public class Game implements Step{
 		return enemies.size();}
 
 	public int getHighScore(){
-		return highScore;}}
+		return highScore;}
+
+	public Bounds getBounds(){
+		return bounds;}}
