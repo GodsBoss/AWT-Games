@@ -1,6 +1,8 @@
 package org.godsboss.gaming.games.evasion;
 
+import org.godsboss.gaming.ecs.Control;
 import org.godsboss.gaming.ecs.Entity;
+import org.godsboss.gaming.ecs.NullControl;
 import org.godsboss.gaming.physics2d.Bounds;
 import org.godsboss.gaming.physics2d.Position;
 import org.godsboss.gaming.physics2d.Size;
@@ -11,6 +13,7 @@ import java.awt.Color;
 class ObjectFactory{
 	private final Bounds bounds;
 	private final Game game;
+	private final Control nullControl = new NullControl();
 
 	private KillPlayer killPlayer;
 	private BoundedObject playerBounded;
@@ -20,12 +23,15 @@ class ObjectFactory{
 		this.game   = game;
 		this.bounds = bounds;}
 
-	public Player createPlayer(Position startingPosition, Size size){
+	public Entity createPlayer(Position startingPosition, Size size){
 		playerPositionable = new Positionable(startingPosition);
 		Sized sized = new Sized(size);
 		playerBounded = new BoundedObject(playerPositionable, sized);
 		RectangleRenderer renderer = new RectangleRenderer(playerBounded, Color.GREEN);
-		return new Player(playerPositionable, sized, renderer, new MoveObjectToMousePosition(playerPositionable));}
+		Entity player = new Entity(renderer, new MoveObjectToMousePosition(playerPositionable));
+		player.addComponent(playerPositionable);
+		player.addComponent(sized);
+		return player;}
 
 	public Entity createEnemy(Position startingPosition){
 		if (killPlayer == null){
@@ -34,7 +40,7 @@ class ObjectFactory{
 		Sized sized = new Sized(Size.randomWithin(10, 30));
 		BoundedObject enemyBounded = new BoundedObject(positionable, sized);
 		RectangleRenderer renderer = new RectangleRenderer(enemyBounded, Color.RED);
-		Entity enemy = new Entity(renderer);
+		Entity enemy = new Entity(renderer, nullControl);
 		enemy.addComponent(positionable);
 		enemy.addComponent(createMoving(positionable));
 		enemy.addComponent(sized);

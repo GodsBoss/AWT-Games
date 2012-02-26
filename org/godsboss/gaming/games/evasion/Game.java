@@ -25,7 +25,7 @@ public class Game implements Step{
 	private Output output;
 	private EventStorage eventStorage;
 	private ObjectFactory factory = new ObjectFactory(this, bounds);
-	private Player player = factory.createPlayer(bounds.getCenter(), new Size(20, 20));
+	private Entity player = factory.createPlayer(bounds.getCenter(), new Size(20, 20));
 
 	public void start(){
 		Window win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
@@ -81,7 +81,7 @@ public class Game implements Step{
 	public boolean isOver(){
 		return isGameOver;}
 
-	public Player getPlayer(){
+	public Entity getPlayer(){
 		return player;}
 
 	public List<Entity> getEnemies(){
