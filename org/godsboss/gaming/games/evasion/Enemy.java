@@ -36,14 +36,5 @@ class Enemy{
 		positionable.tick(seconds);
 		collision.tick(seconds);}
 
-	public Position getPosition(){
-		return positionable.get();}
-
-	public Bounds toBounds(){
-		return positionable.get().centerBoundsWithSize(sized.get());}
-
-	public Size getSize(){
-		return sized.get();}
-
 	public void render(Graphics g){
 		renderer.drawOnto(g);}}
