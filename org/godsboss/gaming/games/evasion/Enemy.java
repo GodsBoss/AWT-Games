@@ -22,7 +22,7 @@ class Enemy{
 	public void tick(double seconds){
 		size = size.plus(seconds, seconds);
 		position = position.plus(velocity.times(seconds)).modulo(bounds);
-		if (game.getPlayer().toBounds().doesOverlap(getPosition().centerBoundsWithSize(getSize()))){
+		if (game.getPlayer().overlapsWith(getPosition().centerBoundsWithSize(getSize()))){
 			game.endGame();}}
 
 	public Position getPosition(){

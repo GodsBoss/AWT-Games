@@ -23,6 +23,9 @@ class Player{
 	public void moveTo(Position newPosition){
 		positionable.moveTo(newPosition);}
 
+	public boolean overlapsWith(Bounds bounds){
+		return bounds.doesOverlap(positionable.get().centerBoundsWithSize(size));}
+
 	public void tick(double seconds){
 		positionable.tick(seconds);}
 
