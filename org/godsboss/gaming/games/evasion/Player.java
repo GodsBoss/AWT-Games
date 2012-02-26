@@ -18,18 +18,6 @@ class Player{
 		this.sized = sized;
 		this.renderer = renderer;}
 
-	public Position getPosition(){
-		return positionable.get();}
-
-	public Bounds toBounds(){
-		return positionable.get().centerBoundsWithSize(sized.get());}
-
-	public void moveTo(Position newPosition){
-		positionable.moveTo(newPosition);}
-
-	public boolean overlapsWith(Bounds bounds){
-		return bounds.doesOverlap(positionable.get().centerBoundsWithSize(sized.get()));}
-
 	public void tick(double seconds){
 		positionable.tick(seconds);}
 

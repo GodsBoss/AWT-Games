@@ -13,17 +13,18 @@ class ObjectFactory{
 
 	private KillPlayer killPlayer;
 	private BoundedObject playerBounded;
+	private Positionable playerPositionable;
 
 	public ObjectFactory(Game game, Bounds bounds){
 		this.game   = game;
 		this.bounds = bounds;}
 
 	public Player createPlayer(Position startingPosition, Size size){
-		Positionable positionable = new Positionable(startingPosition);
+		playerPositionable = new Positionable(startingPosition);
 		Sized sized = new Sized(size);
-		playerBounded = new BoundedObject(positionable, sized);
+		playerBounded = new BoundedObject(playerPositionable, sized);
 		RectangleRenderer renderer = new RectangleRenderer(playerBounded, Color.GREEN);
-		return new Player(positionable, sized, renderer);}
+		return new Player(playerPositionable, sized, renderer);}
 
 	public Enemy createEnemy(Position startingPosition){
 		if (killPlayer == null){
@@ -40,4 +41,4 @@ class ObjectFactory{
 		return new Moving(positionable, bounds, Velocity.randomDirection(80));}
 
 	public EnemySpawner createEnemySpawner(double threshold){
-		return new EnemySpawner(threshold, game, this);}}
+		return new EnemySpawner(threshold, playerPositionable, game, this);}}
