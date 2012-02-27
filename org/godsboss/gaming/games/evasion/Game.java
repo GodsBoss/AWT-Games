@@ -8,9 +8,7 @@ import org.godsboss.gaming.ecs.Entity;
 import org.godsboss.gaming.gui.Factory;
 import org.godsboss.gaming.gui.Window;
 import org.godsboss.gaming.physics2d.Bounds;
-import org.godsboss.gaming.physics2d.Position;
 import org.godsboss.gaming.physics2d.Size;
-import org.godsboss.gaming.physics2d.Velocity;
 
 import java.util.LinkedList;
 import java.util.List;
