@@ -1,9 +1,9 @@
-package org.godsboss.games.evasion;
+package org.godsboss.gcomp.physics2d;
 
 import org.godsboss.gaming.ecs.Attribute;
 import org.godsboss.gaming.physics2d.Position;
 
-class Positionable extends Attribute<Position>{
+public class Positionable extends Attribute<Position>{
 	public Positionable(Position initialPosition){
 		super(initialPosition);}
 

@@ -1,10 +1,10 @@
-package org.godsboss.games.evasion;
+package org.godsboss.gcomp.physics2d;
 
 import org.godsboss.gaming.ecs.Component;
 import org.godsboss.gaming.physics2d.Bounds;
 import org.godsboss.gaming.physics2d.PositionDifference;
 
-class RelativePositioning implements Component{
+public class RelativePositioning implements Component{
 	private final Positionable self;
 	private final Positionable reference;
 	private final PositionDifference offset;

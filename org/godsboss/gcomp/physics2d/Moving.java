@@ -1,9 +1,9 @@
-package org.godsboss.games.evasion;
+package org.godsboss.gcomp.physics2d;
 
 import org.godsboss.gaming.ecs.Component;
 import org.godsboss.gaming.physics2d.Velocity;
 
-class Moving implements Component{
+public class Moving implements Component{
 	private final Positionable positionable;
 	private Velocity velocity;
 

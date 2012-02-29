@@ -3,6 +3,7 @@ package org.godsboss.games.evasion;
 import org.godsboss.gaming.control.EventStorage;
 import org.godsboss.gaming.ecs.Control;
 import org.godsboss.gaming.physics2d.Position;
+import org.godsboss.gcomp.physics2d.Positionable;
 
 import java.awt.event.MouseEvent;
 

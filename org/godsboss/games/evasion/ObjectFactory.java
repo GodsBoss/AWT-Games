@@ -9,7 +9,11 @@ import org.godsboss.gaming.physics2d.Position;
 import org.godsboss.gaming.physics2d.PositionDifference;
 import org.godsboss.gaming.physics2d.Size;
 import org.godsboss.gaming.physics2d.Velocity;
+import org.godsboss.gcomp.physics2d.BoundedPositioning;
 import org.godsboss.gcomp.physics2d.Growing;
+import org.godsboss.gcomp.physics2d.Moving;
+import org.godsboss.gcomp.physics2d.Positionable;
+import org.godsboss.gcomp.physics2d.RelativePositioning;
 import org.godsboss.gcomp.physics2d.Sized;
 
 import java.awt.Color;

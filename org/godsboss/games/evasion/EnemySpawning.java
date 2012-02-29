@@ -1,6 +1,7 @@
 package org.godsboss.games.evasion;
 
 import org.godsboss.gaming.ecs.Component;
+import org.godsboss.gcomp.physics2d.Positionable;
 
 class EnemySpawning implements Component{
 	private final double threshold;
