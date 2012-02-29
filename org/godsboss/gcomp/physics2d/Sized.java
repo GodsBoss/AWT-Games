@@ -1,9 +1,9 @@
-package org.godsboss.games.evasion;
+package org.godsboss.gcomp.physics2d;
 
 import org.godsboss.gaming.ecs.Attribute;
 import org.godsboss.gaming.physics2d.Size;
 
-class Sized extends Attribute<Size>{
+public class Sized extends Attribute<Size>{
 	public Sized(Size initialSize){
 		super(initialSize);}
 

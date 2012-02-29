@@ -1,6 +1,7 @@
 package org.godsboss.games.evasion;
 
 import org.godsboss.gaming.physics2d.Bounds;
+import org.godsboss.gcomp.physics2d.Sized;
 
 class BoundedObject{
 	private final Positionable positionable;

@@ -1,8 +1,8 @@
-package org.godsboss.games.evasion;
+package org.godsboss.gcomp.physics2d;
 
 import org.godsboss.gaming.ecs.Component;
 
-class Growing implements Component{
+public class Growing implements Component{
 	private Sized sized;
 
 	public Growing(Sized sized){
