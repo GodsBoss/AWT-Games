@@ -1,4 +1,4 @@
-package org.godsboss.gaming.games.evasion;
+package org.godsboss.games.evasion;
 
 import org.godsboss.gaming.ecs.Component;
 import org.godsboss.gaming.physics2d.Bounds;

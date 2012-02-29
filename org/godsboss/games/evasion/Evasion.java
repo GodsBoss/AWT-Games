@@ -1,4 +1,4 @@
-package org.godsboss.gaming.games.evasion;
+package org.godsboss.games.evasion;
 
 public class Evasion{
 	public static void main(String[] args){

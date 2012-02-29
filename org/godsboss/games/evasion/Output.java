@@ -1,4 +1,4 @@
-package org.godsboss.gaming.games.evasion;
+package org.godsboss.games.evasion;
 
 import org.godsboss.gaming.ecs.Entity;
 import org.godsboss.gaming.gui.Renderer;

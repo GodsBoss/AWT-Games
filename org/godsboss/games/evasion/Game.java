@@ -1,4 +1,4 @@
-package org.godsboss.gaming.games.evasion;
+package org.godsboss.games.evasion;
 
 import org.godsboss.gaming.app.Loop;
 import org.godsboss.gaming.app.Step;
