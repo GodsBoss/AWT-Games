@@ -5,6 +5,7 @@
 		<vendor>God's Boss</vendor>
 	</information>
 	<resources>
+		<j2se version="1.7+" />
 		<jar href="gaming.jar" />
 	</resources>
 	<application-desc main-class="org.godsboss.gaming.games.evasion.Evasion">
