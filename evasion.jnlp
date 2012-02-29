@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp>
+	<information>
+		<title>Evasion</title>
+		<vendor>God's Boss</vendor>
+	</information>
+	<resources>
+		<jar href="gaming.jar" />
+	</resources>
+	<application-desc main-class="org.godsboss.gaming.games.evasion.Evasion">
+	</application-desc>
+</jnlp>
