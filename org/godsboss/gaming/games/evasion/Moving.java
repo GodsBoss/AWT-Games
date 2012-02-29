@@ -12,4 +12,4 @@ class Moving implements Component{
 		this.velocity = velocity;}
 
 	public void tick(double seconds){
-		positionable.moveTo(positionable.get().plus(velocity.times(seconds)));}}
+		positionable.moveTo(positionable.getNext().plus(velocity.times(seconds)));}}

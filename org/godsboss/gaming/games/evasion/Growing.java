@@ -9,4 +9,4 @@ class Growing implements Component{
 		this.sized = sized;}
 
 	public void tick(double seconds){
-		sized.resize(sized.get().plus(seconds, seconds));}}
+		sized.resize(sized.getNext().plus(seconds, seconds));}}
