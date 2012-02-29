@@ -1,5 +1,6 @@
 package org.godsboss.games.evasion;
 
+import org.godsboss.gaming.ecs.Attribute;
 import org.godsboss.gaming.physics2d.Size;
 
 class Sized extends Attribute<Size>{

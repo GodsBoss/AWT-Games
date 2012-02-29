@@ -1,8 +1,6 @@
-package org.godsboss.games.evasion;
+package org.godsboss.gaming.ecs;
 
-import org.godsboss.gaming.ecs.Component;
-
-class Attribute<Type> implements Component{
+public class Attribute<Type> implements Component{
 	private Type actualValue;
 	private Type nextValue;
 
