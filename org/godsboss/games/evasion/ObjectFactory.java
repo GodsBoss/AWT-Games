@@ -89,7 +89,6 @@ class ObjectFactory{
 	private void addTargetPlayerComponents(Entity spawner, double threshold){
 		Positionable self = new Positionable(new Position(0, 0));
 		PositionDifference diff = (new Position(0, 0)).minus(bounds.getCenter());
-		RelativePositioning positioning = new RelativePositioning(self, playerPositionable, diff, bounds);
-		spawner.addComponent(positioning);
+		spawner.addComponent(new OppositePointOfCircle(self, playerPositionable, bounds.getCenter(), 100));
 		spawner.addComponent(self);
 		spawner.addComponent(new TargetPlayerSpawning(threshold, self, playerPositionable, this, game));}}

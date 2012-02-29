@@ -12,6 +12,9 @@ public class Velocity{
 		double angle = Math.random() * 2 * Math.PI;
 		return new Velocity(Math.sin(angle)*speed, Math.cos(angle)*speed);}
 
+	public static Velocity fromPositionDifference(PositionDifference difference){
+		return new Velocity(difference.getHorizontal(), difference.getVertical());}
+
 	public double getHorizontal(){
 		return horizontal;}
 

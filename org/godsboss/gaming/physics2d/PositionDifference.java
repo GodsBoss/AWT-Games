@@ -12,4 +12,7 @@ public class PositionDifference{
 		return horizontal;}
 
 	public double getVertical(){
-		return vertical;}}
+		return vertical;}
+
+	public double getLength(){
+		return Math.sqrt(horizontal*horizontal + vertical*vertical);}}
