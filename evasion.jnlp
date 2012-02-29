@@ -3,6 +3,7 @@
 	<information>
 		<title>Evasion</title>
 		<vendor>God's Boss</vendor>
+		<offline-allowed />
 	</information>
 	<resources>
 		<j2se version="1.7+" />
