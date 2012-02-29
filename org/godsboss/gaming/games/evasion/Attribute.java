@@ -13,6 +13,9 @@ class Attribute<Type> implements Component{
 	public Type get(){
 		return actualValue;}
 
+	public Type getNext(){
+		return nextValue;}
+
 	public void setNext(Type newValue){
 		nextValue = newValue;}
 

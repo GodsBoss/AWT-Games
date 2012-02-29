@@ -45,13 +45,14 @@ class ObjectFactory{
 		Entity enemy = new Entity(renderer, nullControl);
 		enemy.addComponent(positionable);
 		enemy.addComponent(createMoving(positionable));
+		enemy.addComponent(new BoundedPositioning(positionable, bounds));
 		enemy.addComponent(sized);
 		enemy.addComponent(new Growing(sized));
 		enemy.addComponent(new CollidesWithPlayer(enemyBounded, playerBounded, killPlayer));
 		return enemy;}
 
 	private Moving createMoving(Positionable positionable){
-		return new Moving(positionable, bounds, Velocity.randomDirection(80));}
+		return new Moving(positionable, Velocity.randomDirection(80));}
 
 	public Entity createEnemySpawner(double threshold){
 		Entity spawner = new Entity(new NullRenderer(), nullControl);
