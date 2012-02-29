@@ -10,6 +10,8 @@
 		<j2se version="1.7+" />
 		<jar href="gaming.jar" />
 	</resources>
-	<application-desc main-class="org.godsboss.gaming.games.evasion.Evasion">
+	<application-desc main-class="org.godsboss.games.evasion.Evasion">
+		<argument>--enemy-directions</argument>
+		<argument>main-axes</argument>
 	</application-desc>
 </jnlp>

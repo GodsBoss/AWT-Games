@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+	codebase="http://godsboss.github.com/AWT-Games/">
+	<information>
+		<title>Evasion</title>
+		<vendor>God's Boss</vendor>
+		<offline-allowed />
+	</information>
+	<resources>
+		<j2se version="1.7+" />
+		<jar href="gaming.jar" />
+	</resources>
+	<application-desc main-class="org.godsboss.games.evasion.Evasion">
+		<argument>--enemy-directions</argument>
+		<argument>random</argument>
+	</application-desc>
+</jnlp>
