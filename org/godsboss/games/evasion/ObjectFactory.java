@@ -43,6 +43,9 @@ class ObjectFactory{
 		return player;}
 
 	public Entity createEnemy(Position startingPosition){
+		return createEnemy(startingPosition, Velocity.randomDirection(80));}
+
+	public Entity createEnemy(Position startingPosition, Velocity velocity){
 		if (killPlayer == null){
 			killPlayer = new KillPlayer(game);}
 		Positionable positionable = new Positionable(startingPosition);
@@ -51,7 +54,7 @@ class ObjectFactory{
 		RectangleRenderer renderer = new RectangleRenderer(enemyBounded, Color.RED);
 		Entity enemy = new Entity(renderer, NullControl.NULL_CONTROL);
 		enemy.addComponent(positionable);
-		enemy.addComponent(new Moving(positionable, Velocity.randomDirection(80)));
+		enemy.addComponent(new Moving(positionable, velocity));
 		enemy.addComponent(new BoundedPositioning(positionable, bounds));
 		enemy.addComponent(sized);
 		enemy.addComponent(new Growing(sized));
@@ -60,10 +63,33 @@ class ObjectFactory{
 
 	public Entity createEnemySpawner(double threshold){
 		Entity spawner = new Entity(NullRenderer.NULL_RENDERER, NullControl.NULL_CONTROL);
+		switch(config.getEnemyDirections()){
+			case RANDOM:
+				addRandomDirectionComponents(spawner, threshold);
+				break;
+			case MAIN_AXES:
+				addMainAxesComponents(spawner, threshold);
+				break;
+			case TARGET_PLAYER:
+				addTargetPlayerComponents(spawner, threshold);
+				break;}
+		return spawner;}
+
+	private void addRandomDirectionComponents(Entity spawner, double threshold){
 		Positionable self = new Positionable(new Position(0, 0));
 		PositionDifference diff = (new Position(0, 0)).minus(bounds.getCenter());
 		RelativePositioning positioning = new RelativePositioning(self, playerPositionable, diff, bounds);
 		spawner.addComponent(positioning);
 		spawner.addComponent(self);
-		spawner.addComponent(new EnemySpawning(0.333, self, this, game));
-		return spawner;}}
+		spawner.addComponent(new EnemySpawning(threshold, self, this, game));}
+
+	private void addMainAxesComponents(Entity spawner, double threshold){
+		spawner.addComponent(new MainAxesSpawning(threshold, playerPositionable, this, game));}
+
+	private void addTargetPlayerComponents(Entity spawner, double threshold){
+		Positionable self = new Positionable(new Position(0, 0));
+		PositionDifference diff = (new Position(0, 0)).minus(bounds.getCenter());
+		RelativePositioning positioning = new RelativePositioning(self, playerPositionable, diff, bounds);
+		spawner.addComponent(positioning);
+		spawner.addComponent(self);
+		spawner.addComponent(new TargetPlayerSpawning(threshold, self, playerPositionable, this, game));}}

@@ -18,5 +18,11 @@ public class Velocity{
 	public double getVertical(){
 		return vertical;}
 
+	public double getSpeed(){
+		return Math.sqrt(horizontal*horizontal + vertical*vertical);}
+
+	public Velocity normalize(){
+		return this.times(1 / this.getSpeed());}
+
 	public Velocity times(double factor){
 		return new Velocity(factor*horizontal, factor*vertical);}}
