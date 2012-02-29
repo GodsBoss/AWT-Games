@@ -1,21 +1,10 @@
 package org.godsboss.gaming.games.evasion;
 
-import org.godsboss.gaming.ecs.Component;
 import org.godsboss.gaming.physics2d.Size;
 
-class Sized implements Component{
-	private Size size;
-	private Size nextSize;
-
+class Sized extends Attribute<Size>{
 	public Sized(Size initialSize){
-		size = initialSize;
-		nextSize = initialSize;}
-
-	public Size get(){
-		return size;}
+		super(initialSize);}
 
 	public void resize(Size newSize){
-		nextSize = newSize;}
-
-	public void tick(double seconds){
-		size = nextSize;}}
+		setNext(newSize);}}
