@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Game implements Step{
+	private final GameConfiguration config;
 	private boolean isGameOver = true;
 	private LinkedList<Entity> enemies;
 	private int highScore = 0;
@@ -22,16 +23,21 @@ public class Game implements Step{
 	private Entity enemySpawner;
 	private Output output;
 	private EventStorage eventStorage;
-	private ObjectFactory factory = new ObjectFactory(this, bounds);
-	private Entity player = factory.createPlayer(bounds.getCenter(), new Size(20, 20));
+	private ObjectFactory factory;
+	private Entity player;
+
+	public Game(GameConfiguration config){
+		this.config = config;}
 
 	public void start(){
+		factory = new ObjectFactory(config, this, bounds);
 		Window win = Factory.createWindow("Evasion", (int)bounds.getWidth(), (int)bounds.getHeight());
 		eventStorage = new EventStorage();
 		win.addMouseListener(eventStorage);
 		win.addMouseMotionListener(eventStorage);
 		loop = new Loop(this, 15);
 		win.addWindowListener(new LoopShutdownWindowListener(loop));
+		player = factory.createPlayer(bounds.getCenter(), new Size(20, 20));
 		enemySpawner = factory.createEnemySpawner(0.333);
 		output = new Output(this, win);
 		loop.start();}

@@ -19,6 +19,7 @@ import org.godsboss.gcomp.physics2d.Sized;
 import java.awt.Color;
 
 class ObjectFactory{
+	private final GameConfiguration config;
 	private final Bounds bounds;
 	private final Game game;
 
@@ -26,7 +27,8 @@ class ObjectFactory{
 	private BoundedObject playerBounded;
 	private Positionable playerPositionable;
 
-	public ObjectFactory(Game game, Bounds bounds){
+	public ObjectFactory(GameConfiguration config, Game game, Bounds bounds){
+		this.config = config;
 		this.game   = game;
 		this.bounds = bounds;}
 

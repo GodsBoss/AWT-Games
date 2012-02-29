@@ -2,5 +2,6 @@ package org.godsboss.games.evasion;
 
 public class Evasion{
 	public static void main(String[] args){
-		Game game = new Game();
+		GameConfiguration config = new GameConfiguration();
+		Game game = new Game(config);
 		game.start();}}
