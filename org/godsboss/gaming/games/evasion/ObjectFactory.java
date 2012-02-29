@@ -15,7 +15,6 @@ import java.awt.Color;
 class ObjectFactory{
 	private final Bounds bounds;
 	private final Game game;
-	private final Control nullControl = new NullControl();
 
 	private KillPlayer killPlayer;
 	private BoundedObject playerBounded;
@@ -42,7 +41,7 @@ class ObjectFactory{
 		Sized sized = new Sized(Size.randomWithin(10, 30));
 		BoundedObject enemyBounded = new BoundedObject(positionable, sized);
 		RectangleRenderer renderer = new RectangleRenderer(enemyBounded, Color.RED);
-		Entity enemy = new Entity(renderer, nullControl);
+		Entity enemy = new Entity(renderer, NullControl.NULL_CONTROL);
 		enemy.addComponent(positionable);
 		enemy.addComponent(new Moving(positionable, Velocity.randomDirection(80)));
 		enemy.addComponent(new BoundedPositioning(positionable, bounds));
@@ -52,7 +51,7 @@ class ObjectFactory{
 		return enemy;}
 
 	public Entity createEnemySpawner(double threshold){
-		Entity spawner = new Entity(new NullRenderer(), nullControl);
+		Entity spawner = new Entity(NullRenderer.NULL_RENDERER, NullControl.NULL_CONTROL);
 		Positionable self = new Positionable(new Position(0, 0));
 		PositionDifference diff = (new Position(0, 0)).minus(bounds.getCenter());
 		RelativePositioning positioning = new RelativePositioning(self, playerPositionable, diff, bounds);
