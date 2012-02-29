@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jnlp>
+<jnlp
+	codebase="godsboss.github.com/AWT-Games/">
 	<information>
 		<title>Evasion</title>
 		<vendor>God's Boss</vendor>
